@@ -1,3 +1,5 @@
+// src/App.jsx
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -16,8 +18,8 @@ import BlogPost from './pages/BlogPost';
 import './styles/global.css';
 
 function App() {
-  // Use basename for GitHub Pages
-  const basename = process.env.PUBLIC_URL;
+  // Use basename for GitHub Pages deployment if needed
+  const basename = process.env.PUBLIC_URL || '';
 
   return (
     <Router basename={basename}>
@@ -29,7 +31,12 @@ function App() {
           <Route path="/courses/:courseId" element={<CourseDetail />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:blogId" element={<BlogPost />} />
-          <Route path="*" element={<div>Page Not Found</div>} />
+          <Route path="*" element={
+            <div className="container" style={{padding: '100px 0', textAlign: 'center'}}>
+              <h1>Page Not Found</h1>
+              <p>The page you are looking for does not exist.</p>
+            </div>
+          } />
         </Routes>
       </main>
       <Footer />
