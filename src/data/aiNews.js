@@ -1,30 +1,30 @@
 export const aiNews = [
   {
-    title: 'USC Researchers Develop New AI Model for Medical Imaging',
-    excerpt: 'A team at USC has developed a new AI model that improves the accuracy of medical image analysis by 35%, potentially leading to earlier disease detection.',
-    link: '/blog/usc-ai-medical-imaging',
+    title: 'USC Launches New AI Initiative for Inclusive Education',
+    excerpt: 'The University of Southern California has launched a groundbreaking initiative aimed at making AI education accessible to students across all disciplines and backgrounds.',
+    link: '/blog/usc-ai-initiative-launch',
     date: 'March 3, 2025',
-    source: 'USC Research',
+    source: 'USC News',
     author: 'Dr. James Wong',
-    image: '/images/blog-images/ai-medical.jpg'
+    image: '/images/blog-images/usc-ai-initiative.jpg'
   },
   {
-    title: 'How Generative AI is Transforming Web Development',
-    excerpt: 'Explore how new AI tools are changing the way developers build websites and web applications, from code assistance to automated testing.',
-    link: '/blog/generative-ai-web-dev',
+    title: 'How Generative AI is Transforming Higher Education',
+    excerpt: 'Explore how new AI tools are changing the way students learn and faculty teach, creating new opportunities for personalized education.',
+    link: '/blog/generative-ai-education',
     date: 'February 28, 2025',
-    source: 'Tech Insights',
+    source: 'Education Insights',
     author: 'Sarah Martinez',
-    image: '/images/blog-images/gen-ai-webdev.jpg'
+    image: '/images/blog-images/gen-ai-education.jpg'
   },
   {
-    title: 'The Rise of AI-Assisted Coding: What Students Need to Know',
-    excerpt: 'As AI coding assistants become more prevalent in the industry, students need to adapt their learning approach to stay competitive.',
-    link: '/blog/ai-assisted-coding',
+    title: 'AI Literacy: The New Essential Skill for College Students',
+    excerpt: 'As AI becomes increasingly integrated into all industries, universities are recognizing AI literacy as a fundamental skill for all graduates.',
+    link: '/blog/ai-literacy-essential',
     date: 'February 25, 2025',
-    source: 'Education Tech',
+    source: 'Higher Ed Tech',
     author: 'Michael Chen',
-    image: '/images/blog-images/ai-coding.jpg'
+    image: '/images/blog-images/ai-literacy.jpg'
   },
   {
     title: 'USC Hosts AI Ethics Symposium with Industry Leaders',
@@ -35,3 +35,5 @@ export const aiNews = [
     image: '/images/blog-images/ai-ethics.jpg'
   }
 ];
+
+export default aiNews;
