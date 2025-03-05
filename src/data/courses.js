@@ -1,67 +1,71 @@
 export const featuredCourses = [
   {
-    id: 'frontend-developer',
-    title: 'The Frontend Developer Career Path',
-    subtitle: 'Launch your career as a frontend developer with this immersive path.',
-    thumbnail: '/images/course-thumbnails/frontend-dev.jpg',
-    category: 'Frontend',
+    id: 'ai-for-everyone',
+    title: 'AI For Everyone',
+    subtitle: 'AI is not only for engineers. If you want your organization to become better at using AI, this is the course to tell everyone--especially your non-technical colleagues--to take.',
+    thumbnail: '/aiforstudent_poc/images/course-thumbnails/ai.jpg',
+    category: 'AI',
     difficulty: 'Beginner',
-    duration: '81.5 hrs',
-    modules: 70,
-    badges: ['PRO', 'UPDATED'],
+    duration: '5 hours',
+    modules: 4,
+    badges: ['NEW'],
     instructor: {
-      name: 'Alex Johnson',
-      title: 'Senior Frontend Developer',
-      avatar: '/images/instructors/alex.jpg'
-    }
+      name: 'Andrew Ng',
+      title: 'Top Instructor',
+      avatar: '/aiforstudent_poc/images/instructors/coursera.png'
+    },
+    externalLink: 'https://www.coursera.org/learn/ai-for-everyone'
   },
   {
-    id: 'react-basics',
-    title: 'React Basics',
-    subtitle: 'Learn the fundamentals of building interactive UIs with React.',
-    thumbnail: '/images/course-thumbnails/react-basics.jpg',
-    category: 'React',
+    id: 'ai-nano-degree-program',
+    title: 'Artificial Intelligence Nanodegree Program',
+    subtitle: 'Master the foundations of artificial intelligence by exploring essential AI techniques, including search algorithms, symbolic logic, and planning systems.',
+    thumbnail: '/aiforstudent_poc/images/course-thumbnails/ai2.jpg',
+    category: 'AI',
     difficulty: 'Intermediate',
-    duration: '15.1 hrs',
+    duration: '2 months',
+    modules: 8,
+    badges: ['NEW'],
+    instructor: {
+      name: 'Peter Norvig',
+      title: 'Research Director, Google',
+      avatar: '/aiforstudent_poc/images/instructors/udacity.jpeg'
+    },
+    externalLink: 'https://www.udacity.com/course/ai-artificial-intelligence-nanodegree--nd898'
+  },
+  {
+    id: 'ai-cs-professional',
+    title: 'Professional Certificate in Computer Science for Artificial Intelligence',
+    subtitle: 'Join Harvard Online in this series of CS50 courses taught by renowned faculty to solve important real-world problems and future-proof your career.',
+    thumbnail: '/aiforstudent_poc/images/course-thumbnails/ai3.jpg',
+    category: 'AI',
+    difficulty: 'Advanced',
+    duration: '6 months',
     modules: 12,
     badges: ['NEW'],
     instructor: {
-      name: 'Sarah Miller',
-      title: 'React Developer',
-      avatar: '/images/instructors/sarah.jpg'
-    }
+      name: 'David J. Malan',
+      title: 'Professor, Harvard University',
+      avatar: '/aiforstudent_poc/images/instructors/harvard.png'
+    },
+    externalLink: 'https://www.harvardonline.harvard.edu/course/professional-certificate-computer-science-artificial-intelligence'
   },
   {
-    id: 'ai-engineer',
-    title: 'The AI Engineer Path',
-    subtitle: 'Build apps powered by generative AI - an essential 2025 skill.',
-    thumbnail: '/images/course-thumbnails/ai-engineer.jpg',
-    category: 'AI',
-    difficulty: 'Intermediate',
-    duration: '9.7 hrs',
-    modules: 8,
-    badges: ['PRO', 'NEW'],
+    id: 'ml-with-databricks',
+    title: 'Machine Learning with Databricks',
+    subtitle: 'Dive into data preparation, model development, deployment, and operations, guided by expert instructors.',
+    thumbnail: '/aiforstudent_poc/images/course-thumbnails/ai4.jpg',
+    category: 'ML',
+    difficulty: 'Beginner',
+    duration: '16 hours',
+    modules: 4,
+    badges: ['NEW'],
     instructor: {
-      name: 'David Chen',
-      title: 'AI Researcher',
-      avatar: '/images/instructors/david.jpg'
-    }
-  },
-  {
-    id: 'advanced-javascript',
-    title: 'Advanced JavaScript',
-    subtitle: 'Master advanced JavaScript concepts through hands-on challenges.',
-    thumbnail: '/images/course-thumbnails/advanced-js.jpg',
-    category: 'JavaScript',
-    difficulty: 'Intermediate',
-    duration: '11 hrs',
-    modules: 10,
-    badges: ['PRO', 'NEW'],
-    instructor: {
-      name: 'Michael Rodriguez',
-      title: 'JavaScript Expert',
-      avatar: '/images/instructors/michael.jpg'
-    }
+      name: 'Anonymous',
+      title: 'None',
+      avatar: '/aiforstudent_poc/images/instructors/databricks.jpg'
+    },
+    externalLink: 'https://www.databricks.com/training/catalog/machine-learning-with-databricks-2422'
   }
 ];
 

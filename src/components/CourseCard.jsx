@@ -15,11 +15,19 @@ const CourseCard = ({ course }) => {
     duration,
     modules,
     badges = [],
-    instructor
+    instructor,
+    externalLink
   } = course;
 
+  // Determine link type: Internal (React Router) or External (New Tab)
+  const isExternal = Boolean(externalLink);
+  const CourseLink = isExternal ? 'a' : Link;
+  const linkProps = isExternal
+    ? { href: externalLink, target: '_blank', rel: 'noopener noreferrer' }
+    : { to: `/courses/${id}` };
+
   return (
-    <div className="course-card card">
+    <CourseLink {...linkProps} className="course-card card">
       <div className="course-thumbnail">
         <img 
           src={thumbnail} 
@@ -29,7 +37,7 @@ const CourseCard = ({ course }) => {
             e.target.onerror = null;
           }} 
         />
-        {badges && badges.map((badge, index) => (
+        {badges.map((badge, index) => (
           <span key={index} className={`badge ${badge.toLowerCase()}`}>
             {badge}
           </span>
@@ -42,9 +50,7 @@ const CourseCard = ({ course }) => {
             <span className="category-name">{category}</span>
           </div>
         )}
-        <h3 className="course-title">
-          <Link to={`/courses/${id}`}>{title}</Link>
-        </h3>
+        <h3 className="course-title">{title}</h3>
         {subtitle && <p className="course-subtitle">{subtitle}</p>}
         <div className="course-meta">
           {duration && (
@@ -84,7 +90,7 @@ const CourseCard = ({ course }) => {
           </div>
         </div>
       )}
-    </div>
+    </CourseLink>
   );
 };
 
@@ -97,6 +103,7 @@ function getCategoryIcon(category) {
     'AI': '🤖',
     'Python': '🐍',
     'Data Science': '📊',
+    'ML': '🖥️',
     'CSS': '🎨',
     'HTML': '📄',
     'TypeScript': '📘',
