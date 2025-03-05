@@ -1,57 +1,6 @@
 /* src/styles/Home.css */
 
 /* Hero Section */
-
-.usc-logo-section {
-  background-color: white;
-  padding: var(--spacing-md) 0;
-  text-align: center;
-}
-
-.usc-logo-container {
-  display: auto;
-  flex-direction: column;
-  align-items: center;
-}
-
-.usc-logo-image {
-  max-width:1200px;
-  height: auto;
-  margin-bottom: var(--spacing-sm);
-}
-
-.usc-logo-caption {
-  color: var(--usc-cardinal);
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-/* Roadmaps Section */
-.roadmaps-section {
-  padding: var(--spacing-xxl) 0;
-}
-
-.roadmaps-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-lg);
-}
-
-@media (max-width: 992px) {
-  .roadmaps-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 576px) {
-  .roadmaps-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .usc-logo-image {
-    max-width: 220px;
-  }
-}
 .hero-section {
   background-color: var(--dark-bg);
   padding: var(--spacing-xxl) 0;
