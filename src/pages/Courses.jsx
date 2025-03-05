@@ -11,68 +11,21 @@ import { featuredCourses } from '../data/courses';
 // Additional courses not in the featured list
 const additionalCourses = [
   {
-    id: 'full-stack-developer',
-    title: 'Full Stack Developer Path',
-    subtitle: 'Master both frontend and backend development to become a versatile developer.',
-    thumbnail: '/images/course-thumbnails/full-stack.jpg',
-    category: 'Full Stack',
-    difficulty: 'Intermediate',
-    duration: '92 hrs',
-    modules: 85,
-    badges: ['PRO'],
-    instructor: {
-      name: 'Michael Rodriguez',
-      title: 'Full Stack Developer',
-      avatar: '/images/instructors/michael.jpg'
-    }
-  },
-  {
-    id: 'data-science-basics',
-    title: 'Data Science Foundations',
-    subtitle: 'Learn the fundamentals of data science with Python, pandas, and visualization.',
-    thumbnail: '/images/course-thumbnails/data-science.jpg',
-    category: 'Data Science',
+    id: 'python',
+    title: 'Python for Data Science, AI & Development',
+    subtitle: 'Learn Python and access and web scrape data using APIs and Python libraries.',
+    thumbnail: '/aiforstudent_poc/images/course-thumbnails/ai5.jpg',
+    category: 'Python',
     difficulty: 'Beginner',
-    duration: '18.5 hrs',
-    modules: 15,
-    badges: ['NEW'],
+    duration: '25 hrs',
+    modules: 5,
+    badges: [''],
     instructor: {
-      name: 'Emily Wong',
-      title: 'Data Scientist',
-      avatar: '/images/instructors/emily.jpg'
-    }
-  },
-  {
-    id: 'cybersecurity-essentials',
-    title: 'Cybersecurity Essentials',
-    subtitle: 'Learn how to protect applications from common security threats.',
-    thumbnail: '/images/course-thumbnails/cybersecurity.jpg',
-    category: 'Security',
-    difficulty: 'Intermediate',
-    duration: '14.3 hrs',
-    modules: 12,
-    badges: ['PRO', 'NEW'],
-    instructor: {
-      name: 'James Lee',
-      title: 'Security Specialist',
-      avatar: '/images/instructors/james.jpg'
-    }
-  },
-  {
-    id: 'database-design',
-    title: 'Database Design & SQL',
-    subtitle: 'Master database design principles and SQL for application development.',
-    thumbnail: '/images/course-thumbnails/database.jpg',
-    category: 'Backend',
-    difficulty: 'Intermediate',
-    duration: '16.8 hrs',
-    modules: 14,
-    badges: [],
-    instructor: {
-      name: 'David Chen',
-      title: 'Database Architect',
-      avatar: '/images/instructors/david.jpg'
-    }
+      name: 'Joseph Santarcangelo',
+      title: 'IBM',
+      avatar: '/aiforstudent_poc/images/instructors/coursera.png'
+    },
+    externalLink: 'https://www.coursera.org/learn/python-for-applied-data-science-ai'
   }
 ];
 
@@ -83,22 +36,21 @@ const Courses = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [difficultyFilter, setDifficultyFilter] = useState('all');
-  
+
   // Filter courses based on active filters and search query
-  const filteredCourses = allCourses.filter(course => {
-    const matchesCategory = activeFilter === 'all' || course.category === activeFilter;
-    const matchesDifficulty = difficultyFilter === 'all' || course.difficulty === difficultyFilter;
-    const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          course.subtitle.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    return matchesCategory && matchesDifficulty && matchesSearch;
-  });
+const filteredCourses = allCourses.filter(course => {
+  const matchesCategory = activeFilter === 'all' ? true : course.category === activeFilter;
+  const matchesDifficulty = difficultyFilter === 'all' ? true : course.difficulty === difficultyFilter;
+  const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                        course.subtitle.toLowerCase().includes(searchQuery.toLowerCase());
+  return matchesCategory && matchesDifficulty && matchesSearch;
+});
   
   // Extract unique categories from all courses
-  const categories = ['all', ...new Set(allCourses.map(course => course.category))];
+  const categories = ['All', ...new Set(allCourses.map(course => course.category))];
   
   // Extract unique difficulties from all courses
-  const difficulties = ['all', ...new Set(allCourses.map(course => course.difficulty))];
+  const difficulties = ['All', ...new Set(allCourses.map(course => course.difficulty))];
   
   return (
     <div className="courses-page">
