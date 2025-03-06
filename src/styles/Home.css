@@ -76,9 +76,9 @@
 
 .hero-container {
   display: flex;
-  justify-content: space-between;  /* Ensures space between content and image */
+  justify-content: space-between;  /* Pushes content and image apart */
   align-items: center;
-  gap: 0px;  /* Adds spacing between the text and image */
+  gap: 50px;  /* Adds spacing between content and image */
 }
 
 .hero-content {
@@ -86,15 +86,17 @@
 }
 
 .hero-image {
-  flex: 1; /* Allows the image to take available space */
+  flex: 1;  /* Allows the image to take available space */
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  padding-top: 0;
+  padding-right: 5%;
+  /* align-items: center; */
 }
 
 .hero-image img {
-  width: 300px;  /* Maintain square shape */
-  height: 300px;
+  width: 400px;  /* Maintain square shape */
+  height: 400px;
   object-fit: cover;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
@@ -155,7 +157,7 @@
   color: var(--text-secondary);
 }
 
-.hero-image {
+/* .hero-image {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -166,7 +168,7 @@
   height: auto;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-}
+} */
 
 /* Featured Courses Section */
 .featured-courses-section {
@@ -282,21 +284,21 @@
   .hero-stats {
     justify-content: center;
   }
-  .hero-image {
+  /* .hero-image {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;  /* Make sure it fits its container */
+    width: 100%;
     height: auto;
   }
   
   .hero-image img {
-    width: 300px;  /* Set a fixed width */
-    height: 300px; /* Set height equal to width to make it square */
-    object-fit: cover;  /* Ensures the image covers the entire square */
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
-  }
+  } */
   
   @media (max-width: 768px) {
     .hero-image img {
