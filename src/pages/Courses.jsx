@@ -57,7 +57,7 @@ const filteredCourses = allCourses.filter(course => {
       <div className="courses-header">
         <div className="container">
           <h1>Learn to Code with USC</h1>
-          <p>Choose from a variety of courses designed to help USC students master web development, AI, and more.</p>
+          <p>Choose from a variety of courses designed to help USC students master AI, ML, Data Science and more.</p>
           
           <div className="search-bar">
             <input 
@@ -172,13 +172,13 @@ const filteredCourses = allCourses.filter(course => {
           </div>
         </div>
         
-        <div className="courses-cta">
+        {/* <div className="courses-cta">
           <div className="cta-content">
             <h2>Need Help Choosing a Course?</h2>
             <p>Speak with a USC academic advisor to get personalized recommendations based on your career goals.</p>
             <button className="button">Schedule Consultation</button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
