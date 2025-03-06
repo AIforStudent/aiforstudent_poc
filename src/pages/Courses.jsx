@@ -14,7 +14,7 @@ const additionalCourses = [
     id: 'python',
     title: 'Python for Data Science, AI & Development',
     subtitle: 'Learn Python and access and web scrape data using APIs and Python libraries.',
-    thumbnail: '/aiforstudent_poc/images/course-thumbnails/ai5.jpg',
+    thumbnail: process.env.PUBLIC_URL + '/images/course-thumbnails/ai5.jpg',
     category: 'Python',
     difficulty: 'Beginner',
     duration: '25 hrs',
@@ -23,7 +23,7 @@ const additionalCourses = [
     instructor: {
       name: 'Joseph Santarcangelo',
       title: 'IBM',
-      avatar: '/aiforstudent_poc/images/instructors/coursera.png'
+      avatar: process.env.PUBLIC_URL + '/images/instructors/coursera.png'
     },
     externalLink: 'https://www.coursera.org/learn/python-for-applied-data-science-ai'
   }
@@ -39,8 +39,8 @@ const Courses = () => {
 
   // Filter courses based on active filters and search query
 const filteredCourses = allCourses.filter(course => {
-  const matchesCategory = activeFilter === 'all' ? true : course.category === activeFilter;
-  const matchesDifficulty = difficultyFilter === 'all' ? true : course.difficulty === difficultyFilter;
+  const matchesCategory = activeFilter === 'All' ? true : course.category === activeFilter;
+  const matchesDifficulty = difficultyFilter === 'All' ? true : course.difficulty === difficultyFilter;
   const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                         course.subtitle.toLowerCase().includes(searchQuery.toLowerCase());
   return matchesCategory && matchesDifficulty && matchesSearch;
@@ -105,17 +105,17 @@ const filteredCourses = allCourses.filter(course => {
         </div>
         
         <div className="active-filters">
-          {activeFilter !== 'all' && (
+          {activeFilter !== 'All' && (
             <div className="active-filter">
               <span>Category: {activeFilter}</span>
-              <button className="clear-filter" onClick={() => setActiveFilter('all')}>×</button>
+              <button className="clear-filter" onClick={() => setActiveFilter('All')}>×</button>
             </div>
           )}
           
-          {difficultyFilter !== 'all' && (
+          {difficultyFilter !== 'All' && (
             <div className="active-filter">
               <span>Difficulty: {difficultyFilter}</span>
-              <button className="clear-filter" onClick={() => setDifficultyFilter('all')}>×</button>
+              <button className="clear-filter" onClick={() => setDifficultyFilter('All')}>×</button>
             </div>
           )}
           
@@ -126,12 +126,12 @@ const filteredCourses = allCourses.filter(course => {
             </div>
           )}
           
-          {(activeFilter !== 'all' || difficultyFilter !== 'all' || searchQuery) && (
+          {(activeFilter !== 'All' || difficultyFilter !== 'All' || searchQuery) && (
             <button 
               className="clear-all-filters"
               onClick={() => {
-                setActiveFilter('all');
-                setDifficultyFilter('all');
+                setActiveFilter('All');
+                setDifficultyFilter('All');
                 setSearchQuery('');
               }}
             >
@@ -143,8 +143,8 @@ const filteredCourses = allCourses.filter(course => {
         <div className="courses-results">
           <h2>
             {filteredCourses.length} {filteredCourses.length === 1 ? 'Course' : 'Courses'} 
-            {activeFilter !== 'all' ? ` in ${activeFilter}` : ''}
-            {difficultyFilter !== 'all' ? ` for ${difficultyFilter} level` : ''}
+            {activeFilter !== 'All' ? ` in ${activeFilter}` : ''}
+            {difficultyFilter !== 'All' ? ` for ${difficultyFilter} level` : ''}
             {searchQuery ? ` matching "${searchQuery}"` : ''}
           </h2>
           
@@ -160,8 +160,8 @@ const filteredCourses = allCourses.filter(course => {
                 <button 
                   className="button"
                   onClick={() => {
-                    setActiveFilter('all');
-                    setDifficultyFilter('all');
+                    setActiveFilter('All');
+                    setDifficultyFilter('All');
                     setSearchQuery('');
                   }}
                 >
