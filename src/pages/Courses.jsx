@@ -33,9 +33,9 @@ const additionalCourses = [
 const allCourses = [...featuredCourses, ...additionalCourses];
 
 const Courses = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeFilter, setActiveFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [difficultyFilter, setDifficultyFilter] = useState('all');
+  const [difficultyFilter, setDifficultyFilter] = useState('All');
 
   // Filter courses based on active filters and search query
 const filteredCourses = allCourses.filter(course => {
