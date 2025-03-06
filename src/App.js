@@ -13,7 +13,8 @@ import Courses from './pages/Courses';
 import CourseDetail from './pages/CourseDetail';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
-import RoadmapStem from './pages/RoadmapStem'; // Import the STEM roadmap component
+import Roadmaps from './pages/Roadmaps';
+import RoadmapStem from './pages/RoadmapStem';
 
 // Styles
 import './styles/global.css';
@@ -32,7 +33,8 @@ function App() {
           <Route path="/courses/:courseId" element={<CourseDetail />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:blogId" element={<BlogPost />} />
-          <Route path="/roadmaps/stem" element={<RoadmapStem />} /> {/* Add route for STEM roadmap */}
+          <Route path="/roadmaps" element={<Roadmaps />} />
+          <Route path="/roadmaps/stem" element={<RoadmapStem />} />
           <Route path="*" element={
             <div className="container" style={{padding: '100px 0', textAlign: 'center'}}>
               <h1>Page Not Found</h1>

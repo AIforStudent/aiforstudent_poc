@@ -15,8 +15,8 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="container navbar-container">
         <div className="navbar-logo">
-          <Link to="/">
-            <img src="/images/logo.png" alt="USC Learning Portal" className="logo" />
+          <Link to="http://improvinghealth.usc.edu/">
+            <img src="https://identity.usc.edu/wp-content/uploads/2022/09/FSeal_Mono_RegUse_Card-Blk_RGB.png" alt="USC Learning Portal" className="logo"/>
             <span className="site-name">USC Learning Portal</span>
           </Link>
         </div>
@@ -24,9 +24,9 @@ const Navbar = () => {
         <div className="desktop-menu">
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/courses" className="nav-link">Courses</Link>
-          <Link to="/blog" className="nav-link">Blog</Link>
-          <Link to="/topics" className="nav-link">Topics</Link>
-          <Link to="/projects" className="nav-link">Projects</Link>
+          <Link to="/blog" className="nav-link">Blogs</Link>
+          <Link to="/Roadmaps" className="nav-link">Roadmaps</Link>
+          <Link to="/News" className="nav-link">News</Link>
         </div>
 
         <div className="nav-actions">
@@ -47,9 +47,9 @@ const Navbar = () => {
           <div className="mobile-menu-content">
             <Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link>
             <Link to="/courses" className="nav-link" onClick={() => setIsMenuOpen(false)}>Courses</Link>
-            <Link to="/blog" className="nav-link" onClick={() => setIsMenuOpen(false)}>Blog</Link>
-            <Link to="/topics" className="nav-link" onClick={() => setIsMenuOpen(false)}>Topics</Link>
-            <Link to="/projects" className="nav-link" onClick={() => setIsMenuOpen(false)}>Projects</Link>
+            <Link to="/blog" className="nav-link" onClick={() => setIsMenuOpen(false)}>Blogs</Link>
+            <Link to="/Roadmaps" className="nav-link" onClick={() => setIsMenuOpen(false)}>Roadmaps</Link>
+            <Link to="/News" className="nav-link" onClick={() => setIsMenuOpen(false)}>News</Link>
             <div className="mobile-menu-footer">
               <button className="button">Sign In</button>
             </div>

@@ -8,16 +8,13 @@ import '../styles/Home.css';
 import BlogCard from '../components/BlogCard';
 import RecentBlogs from '../components/RecentBlogs';
 import AINewsSection from '../components/AINewsSection';
-import RoadmapCard from '../components/RoadmapCard';
 
 // Data - Make sure these imports match your file structure
-import { aiRoadmaps } from '../data/roadmaps';
 import { recentBlogs } from '../data/blogPosts';
 import { aiNews } from '../data/aiNews';
 
 const Home = () => {
   // Default empty arrays to prevent mapping errors
-  const roadmaps = aiRoadmaps || [];
   const blogs = recentBlogs || [];
   const news = aiNews || [];
 
@@ -91,49 +88,6 @@ const Home = () => {
                 e.target.onerror = null;
               }}
             />
-          </div>
-        </div>
-      </section>
-
-      {/* AI Learning Paths */}
-      <section className="roadmaps-section">
-        <div className="container">
-          <div className="section-header">
-            <h2>AI Learning Paths</h2>
-            <Link to="/roadmaps" className="view-all">
-              View All Resources
-            </Link>
-          </div>
-          <div className="roadmaps-grid">
-            {roadmaps.length > 0 ? (
-              roadmaps.map((roadmap) => (
-                <RoadmapCard key={roadmap.id} roadmap={roadmap} />
-              ))
-            ) : (
-              <div className="roadmaps-placeholder">
-                <div className="roadmap-card">
-                  <div className="roadmap-content">
-                    <h3>AI Learning Path for STEM Students</h3>
-                    <p>Specialized AI training for students with technical backgrounds, covering machine learning algorithms, deep learning, and programming.</p>
-                    <Link to="/roadmaps/stem" className="roadmap-link">Explore Path →</Link>
-                  </div>
-                </div>
-                <div className="roadmap-card">
-                  <div className="roadmap-content">
-                    <h3>AI Learning Path for Non-STEM Students</h3>
-                    <p>Accessible AI education for humanities, arts, and social science students, focusing on applications, ethics, and user experience.</p>
-                    <Link to="/roadmaps/non-stem" className="roadmap-link">Explore Path →</Link>
-                  </div>
-                </div>
-                <div className="roadmap-card">
-                  <div className="roadmap-content">
-                    <h3>AI Learning Path for Educational Institutes</h3>
-                    <p>Resources for integrating AI education into institutional curricula, including guidance for departments and faculty.</p>
-                    <Link to="/roadmaps/education" className="roadmap-link">Explore Path →</Link>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </section>
