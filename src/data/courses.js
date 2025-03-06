@@ -3,7 +3,7 @@ export const featuredCourses = [
     id: 'ai-for-everyone',
     title: 'AI For Everyone',
     subtitle: 'AI is not only for engineers. If you want your organization to become better at using AI, this is the course to tell everyone--especially your non-technical colleagues--to take.',
-    thumbnail: '/aiforstudent_poc/images/course-thumbnails/ai.jpg',
+    thumbnail: process.env.PUBLIC_URL + '/images/course-thumbnails/ai.jpg',
     category: 'AI',
     difficulty: 'Beginner',
     duration: '5 hours',
@@ -12,7 +12,7 @@ export const featuredCourses = [
     instructor: {
       name: 'Andrew Ng',
       title: 'Top Instructor',
-      avatar: '/aiforstudent_poc/images/instructors/coursera.png'
+      avatar: process.env.PUBLIC_URL + '/images/instructors/coursera.png'
     },
     externalLink: 'https://www.coursera.org/learn/ai-for-everyone'
   },
@@ -20,7 +20,7 @@ export const featuredCourses = [
     id: 'ai-nano-degree-program',
     title: 'Artificial Intelligence Nanodegree Program',
     subtitle: 'Master the foundations of artificial intelligence by exploring essential AI techniques, including search algorithms, symbolic logic, and planning systems.',
-    thumbnail: '/aiforstudent_poc/images/course-thumbnails/ai2.jpg',
+    thumbnail: process.env.PUBLIC_URL + '/images/course-thumbnails/ai2.jpg',
     category: 'AI',
     difficulty: 'Intermediate',
     duration: '2 months',
@@ -29,7 +29,7 @@ export const featuredCourses = [
     instructor: {
       name: 'Peter Norvig',
       title: 'Research Director, Google',
-      avatar: '/aiforstudent_poc/images/instructors/udacity.jpeg'
+      avatar: process.env.PUBLIC_URL + '/images/instructors/udacity.jpeg'
     },
     externalLink: 'https://www.udacity.com/course/ai-artificial-intelligence-nanodegree--nd898'
   },
@@ -37,7 +37,7 @@ export const featuredCourses = [
     id: 'ai-cs-professional',
     title: 'Professional Certificate in Computer Science for Artificial Intelligence',
     subtitle: 'Join Harvard Online in this series of CS50 courses taught by renowned faculty to solve important real-world problems and future-proof your career.',
-    thumbnail: '/aiforstudent_poc/images/course-thumbnails/ai3.jpg',
+    thumbnail: process.env.PUBLIC_URL + '/images/course-thumbnails/ai3.jpg',
     category: 'AI',
     difficulty: 'Advanced',
     duration: '6 months',
@@ -46,7 +46,7 @@ export const featuredCourses = [
     instructor: {
       name: 'David J. Malan',
       title: 'Professor, Harvard University',
-      avatar: '/aiforstudent_poc/images/instructors/harvard.png'
+      avatar: process.env.PUBLIC_URL + '/images/instructors/harvard.png'
     },
     externalLink: 'https://www.harvardonline.harvard.edu/course/professional-certificate-computer-science-artificial-intelligence'
   },
@@ -54,7 +54,7 @@ export const featuredCourses = [
     id: 'ml-with-databricks',
     title: 'Machine Learning with Databricks',
     subtitle: 'Dive into data preparation, model development, deployment, and operations, guided by expert instructors.',
-    thumbnail: '/aiforstudent_poc/images/course-thumbnails/ai4.jpg',
+    thumbnail: process.env.PUBLIC_URL + '/images/course-thumbnails/ai4.jpg',
     category: 'ML',
     difficulty: 'Beginner',
     duration: '16 hours',
@@ -63,7 +63,7 @@ export const featuredCourses = [
     instructor: {
       name: 'Anonymous',
       title: 'None',
-      avatar: '/aiforstudent_poc/images/instructors/databricks.jpg'
+      avatar: process.env.PUBLIC_URL + '/images/instructors/databricks.jpg'
     },
     externalLink: 'https://www.databricks.com/training/catalog/machine-learning-with-databricks-2422'
   }
