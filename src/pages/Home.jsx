@@ -25,20 +25,21 @@ const Home = () => {
     <div className="home-page">
       {/* USC Logo and Title Section */}
       <section className="usc-logo-section">
-        <div className="container">
+        {/* <div className="container"> */}
           <div className="usc-logo-container">
             <img 
-              src="https://sites.usc.edu/improvinghealth/files/2024/03/cropped-Price-c9fe1aadacbfbc75.jpeg" 
+              // src="https://sites.usc.edu/improvinghealth/files/2024/03/cropped-Price-c9fe1aadacbfbc75.jpeg" 
+              src='/images/home-page/usc-campus3.jpg' 
               alt="USC Logo"
               className="usc-logo-image"
               onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/600x200?text=USC+AI+Initiative';
+                e.target.src = 'https://via.placeholder.com/600x400?text=AI+Education+For+All';
                 e.target.onerror = null;
               }}
             />
-            <h2 className="usc-logo-caption">USC AI Initiative</h2>
+            {/* <h2 className="usc-logo-caption">USC AI Initiative</h2> */}
           </div>
-        </div>
+        {/* </div> */}
       </section>
 
       {/* Hero Section */}
@@ -87,7 +88,7 @@ const Home = () => {
               src="/images/ai-learning.jpg" 
               alt="Students Learning AI"
               onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/600x400?text=AI+Education+For+All';
+                e.target.src = '/images/home-page/usc-logo2.png';
                 e.target.onerror = null;
               }}
             />
