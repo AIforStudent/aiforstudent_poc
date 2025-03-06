@@ -1,4 +1,4 @@
-// src/App.jsx
+// src/App.js
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -13,6 +13,7 @@ import Courses from './pages/Courses';
 import CourseDetail from './pages/CourseDetail';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import RoadmapStem from './pages/RoadmapStem'; // Import the STEM roadmap component
 
 // Styles
 import './styles/global.css';
@@ -31,6 +32,7 @@ function App() {
           <Route path="/courses/:courseId" element={<CourseDetail />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:blogId" element={<BlogPost />} />
+          <Route path="/roadmaps/stem" element={<RoadmapStem />} /> {/* Add route for STEM roadmap */}
           <Route path="*" element={
             <div className="container" style={{padding: '100px 0', textAlign: 'center'}}>
               <h1>Page Not Found</h1>
