@@ -30,7 +30,7 @@ const Navbar = () => {
         </div>
 
         <div className="nav-actions">
-          <button className="button secondary">Sign In</button>
+          {/* <button className="button secondary">Sign In</button> */}
           <button className="menu-toggle" onClick={toggleMenu}>
             <span className="menu-icon"></span>
           </button>
