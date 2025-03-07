@@ -26,7 +26,8 @@ const Navbar = () => {
           <Link to="/courses" className="nav-link">Courses</Link>
           <Link to="/blog" className="nav-link">Blogs</Link>
           <Link to="/Roadmaps" className="nav-link">Roadmaps</Link>
-          <Link to="/News" className="nav-link">News</Link>
+          <Link to="/latest-news" className="nav-link">News</Link> {/* ✅ Updated Route */}
+
         </div>
 
         <div className="nav-actions">

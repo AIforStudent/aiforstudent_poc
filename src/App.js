@@ -15,6 +15,7 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Roadmaps from './pages/Roadmaps';
 import RoadmapStem from './pages/RoadmapStem';
+import NewsPage from "./pages/NewsPage"; 
 
 // Styles
 import './styles/global.css';
@@ -35,12 +36,7 @@ function App() {
           <Route path="/blog/:blogId" element={<BlogPost />} />
           <Route path="/roadmaps" element={<Roadmaps />} />
           <Route path="/roadmaps/stem" element={<RoadmapStem />} />
-          <Route path="*" element={
-            <div className="container" style={{padding: '100px 0', textAlign: 'center'}}>
-              <h1>Page Not Found</h1>
-              <p>The page you are looking for does not exist.</p>
-            </div>
-          } />
+          <Route path="/latest-news" element={<NewsPage />} /> 
         </Routes>
       </main>
       <Footer />
