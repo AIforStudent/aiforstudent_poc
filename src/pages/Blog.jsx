@@ -10,11 +10,11 @@ const Blog = () => {
   // Use all blog posts or recentBlogs as fallback
   const allBlogs = blogPosts || recentBlogs || [];
   
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('All');
   const [activeTag, setActiveTag] = useState(null);
   
   // Extract all unique categories and tags from blog posts
-  const categories = ['all', ...new Set(allBlogs.map(blog => blog.category))];
+  const categories = ['All', ...new Set(allBlogs.map(blog => blog.category))];
   
   const allTags = allBlogs.reduce((tags, blog) => {
     if (blog.tags && Array.isArray(blog.tags)) {
@@ -27,7 +27,7 @@ const Blog = () => {
   
   // Filter blog posts based on active category and tag
   const filteredBlogs = allBlogs.filter(blog => {
-    const matchesCategory = activeCategory === 'all' || blog.category === activeCategory;
+    const matchesCategory = activeCategory === 'All' || blog.category === activeCategory;
     const matchesTag = !activeTag || (blog.tags && blog.tags.includes(activeTag));
     return matchesCategory && matchesTag;
   });
@@ -80,7 +80,7 @@ const Blog = () => {
         </div>
         
         <div className="filter-summary">
-          {activeCategory !== 'all' && (
+          {activeCategory !== 'All' && (
             <div className="active-filter">
               <span>Category: {activeCategory}</span>
               <button 
@@ -104,11 +104,11 @@ const Blog = () => {
             </div>
           )}
           
-          {(activeCategory !== 'all' || activeTag) && (
+          {(activeCategory !== 'All' || activeTag) && (
             <button 
               className="clear-all-filters"
               onClick={() => {
-                setActiveCategory('all');
+                setActiveCategory('All');
                 setActiveTag(null);
               }}
             >
@@ -129,7 +129,7 @@ const Blog = () => {
               <button 
                 className="button"
                 onClick={() => {
-                  setActiveCategory('all');
+                  setActiveCategory('All');
                   setActiveTag(null);
                 }}
               >

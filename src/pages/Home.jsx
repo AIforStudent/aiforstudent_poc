@@ -94,7 +94,7 @@ const Home = () => {
       </section>
 
       {/* Recent Blogs */}
-      {blogs.length > 0 && <RecentBlogs blogs={blogs} />}
+      {/* {blogs.length > 0 && <RecentBlogs blogs={blogs} />} */}
 
       {/* AI News Section */}
       {news.length > 0 && <AINewsSection news={news} />}

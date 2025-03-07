@@ -18,6 +18,36 @@ export const blogPosts = [
     externalLink: 'https://www.analyticsvidhya.com/blog/2025/02/openai-gpt-4-5/'
   },
   {
+    id: 'how-llm-works',
+    title: 'How Large Language Models work',
+    excerpt: 'Thanks to Large Language Models (or LLMs for short), Artificial Intelligence has now caught the attention of pretty much everyone. ChatGPT, possibly the most famous LLM, has immediately skyrocketed in popularity due to the fact that natural language is such a, well, natural interface that has made the recent breakthroughs in Artificial Intelligence accessible to everyone. Nevertheless, how LLMs work is still less commonly understood, unless you are a Data Scientist or in another AI-related role.',
+    coverImage: process.env.PUBLIC_URL + '/images/blog-images/how-llm-works.png',
+    category: 'LLM',
+    author: {
+      name: 'Andreas Stöffelbauer',
+      avatar: process.env.PUBLIC_URL + '/images/instructors/microsoft-llm.jpg'
+    },
+    date: 'October 24, 2024',
+    readTime: 25,
+    tags: ['LLM', 'AI', 'Deep Learning'],
+    externalLink: 'https://medium.com/data-science-at-microsoft/how-large-language-models-work-91c362f5b78f'
+  },
+  {
+    id: 'beginners-guide-ml',
+    title: 'Beginner’s Guide to Machine Learning Concepts and Techniques',
+    excerpt: 'Machine learning is changing how we use technology and data every day. This guide will explain the basics of machine learning, different types of algorithms, and how it’s used in fields like healthcare, banking, and retail. We’ll also clear up the confusion around terms like artificial intelligence and deep learning.',
+    coverImage: process.env.PUBLIC_URL + '/images/blog-images/ml.jpg',
+    category: 'ML',
+    author: {
+      name: 'Kunal Jain',
+      avatar: process.env.PUBLIC_URL + '/images/instructors/analytics-vidhya.jpeg'
+    },
+    date: 'February 5, 2025',
+    readTime: 9,
+    tags: ['ML', 'AI', 'Deep Learning'],
+    externalLink: 'https://www.analyticsvidhya.com/blog/2015/06/machine-learning-basics/'
+  },
+  {
     id: 'beginners-guide-ml',
     title: 'Beginner’s Guide to Machine Learning Concepts and Techniques',
     excerpt: 'Machine learning is changing how we use technology and data every day. This guide will explain the basics of machine learning, different types of algorithms, and how it’s used in fields like healthcare, banking, and retail. We’ll also clear up the confusion around terms like artificial intelligence and deep learning.',

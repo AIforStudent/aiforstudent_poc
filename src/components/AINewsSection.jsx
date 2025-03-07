@@ -15,8 +15,8 @@ const AINewsSection = ({ news = [] }) => {
       <div className="container">
         <div className="section-header">
           <h2>Latest in AI & Tech</h2>
-          <Link to="/blog/category/ai" className="view-all">
-            View All AI Articles
+          <Link to="/latest-news" className="view-all">
+            View All AI Latest Updates
           </Link>
         </div>
 
