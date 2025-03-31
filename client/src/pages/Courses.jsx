@@ -1,163 +1,122 @@
-// src/pages/Courses.jsx
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import CourseCard from '../components/CourseCard';
 import '../styles/Courses.css';
 
-// Import course data
-import { featuredCourses } from '../data/courses';
-
-// Additional courses not in the featured list
-const additionalCourses = [
-  {
-    id: 'python',
-    title: 'Python for Data Science, AI & Development',
-    subtitle: 'Learn Python and access and web scrape data using APIs and Python libraries.',
-    thumbnail: process.env.PUBLIC_URL + '/images/course-thumbnails/ai5.jpg',
-    category: 'Python',
-    difficulty: 'Beginner',
-    duration: '25 hrs',
-    modules: 5,
-    badges: [''],
-    instructor: {
-      name: 'Joseph Santarcangelo',
-      title: 'IBM',
-      avatar: process.env.PUBLIC_URL + '/images/instructors/coursera.png'
-    },
-    externalLink: 'https://www.coursera.org/learn/python-for-applied-data-science-ai'
-  }
-];
-
-// Combine all courses
-const allCourses = [...featuredCourses, ...additionalCourses];
-
 const Courses = () => {
+  const [courses, setCourses] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [difficultyFilter, setDifficultyFilter] = useState('All');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Filter courses based on active filters and search query
-const filteredCourses = allCourses.filter(course => {
-  const matchesCategory = activeFilter === 'All' ? true : course.category === activeFilter;
-  const matchesDifficulty = difficultyFilter === 'All' ? true : course.difficulty === difficultyFilter;
-  const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                        course.subtitle.toLowerCase().includes(searchQuery.toLowerCase());
-  return matchesCategory && matchesDifficulty && matchesSearch;
-});
-  
-  // Extract unique categories from all courses
-  const categories = ['All', ...new Set(allCourses.map(course => course.category))];
-  
-  // Extract unique difficulties from all courses
-  const difficulties = ['All', ...new Set(allCourses.map(course => course.difficulty))];
-  
+  // Fetch courses from the backend
+  useEffect(() => {
+    fetch('/api/courses')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setCourses(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching courses:', err);
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  const filteredCourses = courses.filter(course => {
+    const matchesCategory = activeFilter === 'All' || course.category === activeFilter;
+    const matchesDifficulty = difficultyFilter === 'All' || course.difficulty === difficultyFilter;
+    const matchesSearch =
+      course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (course.subtitle && course.subtitle.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesDifficulty && matchesSearch;
+  });
+
+  const categories = ['All', ...new Set(courses.map(course => course.category))];
+  const difficulties = ['All', ...new Set(courses.map(course => course.difficulty))];
+
+  if (loading) {
+    return <div className="container">Loading courses...</div>;
+  }
+
+  if (error) {
+    return <div className="container">Error: {error}</div>;
+  }
+
   return (
     <div className="courses-page">
-      <div className="courses-header">
-        <div className="container">
-          <h1>Learn to Code with USC</h1>
-          <p>Choose from a variety of courses designed to help USC students master AI, ML, Data Science and more.</p>
-          
-          <div className="search-bar">
-            <input 
-              type="text" 
-              placeholder="Search courses..." 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button className="search-button">Search</button>
-          </div>
-        </div>
-      </div>
-      
       <div className="container">
-        <div className="courses-filters">
-          <div className="filter-section">
+        {/* Search and Filter UI */}
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search courses..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+        <div className="filter-section">
+          <div>
             <h3>Categories</h3>
-            <div className="filter-buttons">
-              {categories.map(category => (
-                <button
-                  key={category}
-                  className={`filter-button ${activeFilter === category ? 'active' : ''}`}
-                  onClick={() => setActiveFilter(category)}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                className={`filter-button ${activeFilter === cat ? 'active' : ''}`}
+                onClick={() => setActiveFilter(cat)}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
-          
-          <div className="filter-section">
+          <div>
             <h3>Difficulty</h3>
-            <div className="filter-buttons">
-              {difficulties.map(difficulty => (
-                <button
-                  key={difficulty}
-                  className={`filter-button ${difficultyFilter === difficulty ? 'active' : ''}`}
-                  onClick={() => setDifficultyFilter(difficulty)}
-                >
-                  {difficulty}
-                </button>
-              ))}
-            </div>
+            {difficulties.map((diff) => (
+              <button
+                key={diff}
+                className={`filter-button ${difficultyFilter === diff ? 'active' : ''}`}
+                onClick={() => setDifficultyFilter(diff)}
+              >
+                {diff}
+              </button>
+            ))}
           </div>
+          <button
+            className="clear-all-filters button"
+            onClick={() => {
+              setActiveFilter('All');
+              setDifficultyFilter('All');
+              setSearchQuery('');
+            }}
+          >
+            Clear all filters
+          </button>
         </div>
-        
-        <div className="active-filters">
-          {activeFilter !== 'All' && (
-            <div className="active-filter">
-              <span>Category: {activeFilter}</span>
-              <button className="clear-filter" onClick={() => setActiveFilter('All')}>×</button>
-            </div>
-          )}
-          
-          {difficultyFilter !== 'All' && (
-            <div className="active-filter">
-              <span>Difficulty: {difficultyFilter}</span>
-              <button className="clear-filter" onClick={() => setDifficultyFilter('All')}>×</button>
-            </div>
-          )}
-          
-          {searchQuery && (
-            <div className="active-filter">
-              <span>Search: {searchQuery}</span>
-              <button className="clear-filter" onClick={() => setSearchQuery('')}>×</button>
-            </div>
-          )}
-          
-          {(activeFilter !== 'All' || difficultyFilter !== 'All' || searchQuery) && (
-            <button 
-              className="clear-all-filters"
-              onClick={() => {
-                setActiveFilter('All');
-                setDifficultyFilter('All');
-                setSearchQuery('');
-              }}
-            >
-              Clear all filters
-            </button>
-          )}
-        </div>
-        
+
+        {/* Courses Results */}
         <div className="courses-results">
           <h2>
-            {filteredCourses.length} {filteredCourses.length === 1 ? 'Course' : 'Courses'} 
-            {activeFilter !== 'All' ? ` in ${activeFilter}` : ''}
-            {difficultyFilter !== 'All' ? ` for ${difficultyFilter} level` : ''}
-            {searchQuery ? ` matching "${searchQuery}"` : ''}
+            {filteredCourses.length} {filteredCourses.length === 1 ? 'Course' : 'Courses'}{' '}
+            {activeFilter !== 'All' ? `in ${activeFilter}` : ''}{' '}
+            {difficultyFilter !== 'All' ? `for ${difficultyFilter} level` : ''}{' '}
+            {searchQuery ? `matching "${searchQuery}"` : ''}
           </h2>
-          
           <div className="courses-grid">
             {filteredCourses.length > 0 ? (
               filteredCourses.map((course) => (
-                <CourseCard key={course.id} course={course} />
+                <CourseCard key={course._id} course={course} />
               ))
             ) : (
               <div className="no-results">
                 <h3>No courses found</h3>
                 <p>Try adjusting your filters to find what you're looking for.</p>
-                <button 
+                <button
                   className="button"
                   onClick={() => {
                     setActiveFilter('All');
@@ -171,14 +130,6 @@ const filteredCourses = allCourses.filter(course => {
             )}
           </div>
         </div>
-        
-        {/* <div className="courses-cta">
-          <div className="cta-content">
-            <h2>Need Help Choosing a Course?</h2>
-            <p>Speak with a USC academic advisor to get personalized recommendations based on your career goals.</p>
-            <button className="button">Schedule Consultation</button>
-          </div>
-        </div> */}
       </div>
     </div>
   );

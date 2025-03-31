@@ -26,3 +26,15 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+// server.js (continued)
+const blogRoutes = require('./routes/blogs');
+const courseRoutes = require('./routes/courses');
+const roadmapRoutes = require('./routes/roadmaps');
+const aiNewsRoutes = require('./routes/aiNews');
+
+app.use('/api/blogs', blogRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/roadmaps', roadmapRoutes);
+app.use('/api/ai-news', aiNewsRoutes);
