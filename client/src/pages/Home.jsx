@@ -1,42 +1,72 @@
-// src/pages/Home.jsx
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "../styles/Home.css";
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/Home.css';
-
-// Components
-import BlogCard from '../components/BlogCard';
-import RecentBlogs from '../components/RecentBlogs';
-import AINewsSection from '../components/AINewsSection';
-
-// Data - Make sure these imports match your file structure
-import { recentBlogs } from '../data/blogPosts';
-import { aiNews } from '../data/aiNews';
+import AINewsSection from "../components/AINewsSection";
+import { recentBlogs } from "../data/blogPosts"; // Keeping blogs as static data
 
 const Home = () => {
-  // Default empty arrays to prevent mapping errors
   const blogs = recentBlogs || [];
-  const news = aiNews || [];
+  const [news, setNews] = useState([]);
+  const [loadingNews, setLoadingNews] = useState(true);
+  const [newsError, setNewsError] = useState(null);
+
+  // Helper to extract a timestamp from the date field
+  const getTimestamp = (date) => {
+    if (typeof date === "string") {
+      return new Date(date).getTime();
+    }
+    if (date && date.$date) {
+      if (typeof date.$date === "object" && date.$date.$numberLong) {
+        return parseInt(date.$date.$numberLong);
+      } else if (typeof date.$date === "string") {
+        return new Date(date.$date).getTime();
+      }
+    }
+    return 0;
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:5001/api/ai-news")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Sort news items by date (most recent first)
+        const sortedNews = data.sort(
+          (a, b) => getTimestamp(b.date) - getTimestamp(a.date)
+        );
+        // Limit to the top 4 most recent articles
+        const limitedNews = sortedNews.slice(0, 4);
+        setNews(limitedNews);
+        setLoadingNews(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching news:", error);
+        setNewsError(error.message);
+        setLoadingNews(false);
+      });
+  }, []);
 
   return (
     <div className="home-page">
       {/* USC Logo and Title Section */}
       <section className="usc-logo-section">
-        {/* <div className="container"> */}
-          <div className="usc-logo-container">
-            <img 
-              // src="https://sites.usc.edu/improvinghealth/files/2024/03/cropped-Price-c9fe1aadacbfbc75.jpeg" 
-              src='/images/home-page/usc-campus3.jpg' 
-              alt="USC Logo"
-              className="usc-logo-image"
-              onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/600x400?text=AI+Education+For+All';
-                e.target.onerror = null;
-              }}
-            />
-            {/* <h2 className="usc-logo-caption">USC AI Initiative</h2> */}
-          </div>
-        {/* </div> */}
+        <div className="usc-logo-container">
+          <img
+            src="/images/home-page/usc-campus3.jpg"
+            alt="USC Logo"
+            className="usc-logo-image"
+            onError={(e) => {
+              e.target.src =
+                "https://via.placeholder.com/600x400?text=AI+Education+For+All";
+              e.target.onerror = null;
+            }}
+          />
+        </div>
       </section>
 
       {/* Hero Section */}
@@ -47,15 +77,19 @@ const Home = () => {
               Why Everyone Should <span className="highlight">Learn AI</span>
             </h1>
             <p className="hero-description">
-              In today's tech-driven world, Artificial Intelligence (AI) is revolutionizing industries across the board. 
-              Yet, many undergraduates lack the crucial AI skills needed for tomorrow's job market. Our AI Cooperative 
-              is here to change that. Empower yourself with our comprehensive resources, from trainings to insightful 
-              issue briefs and articles.
+              In today's tech-driven world, Artificial Intelligence (AI) is
+              revolutionizing industries across the board. Yet, many
+              undergraduates lack the crucial AI skills needed for tomorrow's
+              job market. Our AI Cooperative is here to change that. Empower
+              yourself with our comprehensive resources, from trainings to
+              insightful issue briefs and articles.
             </p>
             <p className="hero-description">
-              Learn how AI is going to impact your future and prepare for any career path with AI literacy – because 
-              in the age of technology, knowledge is power. Our inclusive approach ensures that <strong>everyone</strong>, 
-              regardless of background, major, or experience level, can engage with and benefit from AI education.
+              Learn how AI is going to impact your future and prepare for any
+              career path with AI literacy – because in the age of technology,
+              knowledge is power. Our inclusive approach ensures that{" "}
+              <strong>everyone</strong>, regardless of background, major, or
+              experience level, can engage with and benefit from AI education.
             </p>
             <div className="hero-actions">
               <Link to="/roadmaps" className="button">
@@ -81,11 +115,11 @@ const Home = () => {
             </div>
           </div>
           <div className="hero-image">
-            <img 
-              src="/images/ai-learning.jpg" 
+            <img
+              src="/images/ai-learning.jpg"
               alt="Students Learning AI"
               onError={(e) => {
-                e.target.src = '/images/home-page/usc-logo2.png';
+                e.target.src = "/images/home-page/usc-logo2.png";
                 e.target.onerror = null;
               }}
             />
@@ -97,7 +131,13 @@ const Home = () => {
       {/* {blogs.length > 0 && <RecentBlogs blogs={blogs} />} */}
 
       {/* AI News Section */}
-      {news.length > 0 && <AINewsSection news={news} />}
+      {loadingNews ? (
+        <div>Loading news...</div>
+      ) : newsError ? (
+        <div>Error loading news: {newsError}</div>
+      ) : (
+        news.length > 0 && <AINewsSection news={news} />
+      )}
 
       {/* CTA Section */}
       <section className="cta-section">
@@ -106,7 +146,8 @@ const Home = () => {
             <h2>Start Your AI Learning Journey Today</h2>
             <p>
               Join thousands of USC students who are already building their
-              AI literacy skills and preparing for successful careers in the age of technology.
+              AI literacy skills and preparing for successful careers in the age
+              of technology.
             </p>
             <Link to="/roadmaps" className="button">
               Get Started
