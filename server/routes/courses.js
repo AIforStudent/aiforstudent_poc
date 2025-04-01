@@ -4,10 +4,13 @@ const Course = require('../models/Course');
 
 // GET all courses
 router.get('/', async (req, res) => {
+  console.log('GET /api/courses endpoint hit'); // Debug log
   try {
     const courses = await Course.find();
+    console.log(`Found ${courses.length} courses`); // Debug log
     res.json(courses);
   } catch (err) {
+    console.error('Error in GET /api/courses:', err); // Detailed error
     res.status(500).json({ message: err.message });
   }
 });

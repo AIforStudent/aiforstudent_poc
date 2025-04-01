@@ -9,7 +9,6 @@ const featuredCourses = [
     id: 'ai-for-everyone',
     title: 'AI For Everyone',
     subtitle: 'AI is not only for engineers. If you want your organization to become better at using AI, this is the course to tell everyone--especially your non-technical colleagues--to take.',
-    // Replace process.env.PUBLIC_URL with a static path or URL if needed in the backend context.
     thumbnail: '/images/course-thumbnails/ai.jpg',
     category: 'AI',
     difficulty: 'Beginner',
@@ -87,10 +86,19 @@ mongoose.connect(process.env.MONGO_URI, {
   // (Optional) Clear existing courses:
   await Course.deleteMany({});
   
-  // Insert the featured courses
-  const insertedCourses = await Course.insertMany(featuredCourses);
-  console.log('Courses inserted successfully:', insertedCourses);
-
+  // Insert courses one by one and log each "post call"
+  for (const course of featuredCourses) {
+    console.log(`Posting course: ${course.title}`);
+    try {
+      const newCourse = await Course.create(course);
+      console.log(`Successfully posted: ${newCourse.title}`);
+    } catch (err) {
+      console.error(`Error posting ${course.title}:`, err.message);
+    }
+  }
+  
+  console.log('All courses inserted successfully.');
+  
   // Close the connection and exit the process
   mongoose.connection.close();
 })
