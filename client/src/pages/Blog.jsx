@@ -1,37 +1,65 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BlogCard from '../components/BlogCard';
 import '../styles/Blog.css';
 
-// Import blog data
-import { blogPosts, recentBlogs } from '../data/blogPosts';
-
 const Blog = () => {
-  // Use all blog posts or recentBlogs as fallback
-  const allBlogs = blogPosts || recentBlogs || [];
-  
+  const [blogs, setBlogs] = useState([]);
   const [activeCategory, setActiveCategory] = useState('All');
   const [activeTag, setActiveTag] = useState(null);
-  
-  // Extract all unique categories and tags from blog posts
+  const [loading, setLoading] = useState(true);
+
+  // Fetch all blogs from the backend
+  useEffect(() => {
+    async function fetchBlogs() {
+      try {
+        const res = await fetch('http://127.0.0.1:5001/api/blogs');
+        if (!res.ok) {
+          throw new Error('Failed to fetch blog posts');
+        }
+        const data = await res.json();
+        setBlogs(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchBlogs();
+  }, []);
+
+  // Use fetched blogs as the source of data
+  const allBlogs = blogs;
+
+  // Extract unique categories
   const categories = ['All', ...new Set(allBlogs.map(blog => blog.category))];
-  
+
+  // Extract all unique tags from the blog posts
   const allTags = allBlogs.reduce((tags, blog) => {
     if (blog.tags && Array.isArray(blog.tags)) {
       blog.tags.forEach(tag => tags.add(tag));
     }
     return tags;
   }, new Set());
-  
+
   const tags = Array.from(allTags);
-  
-  // Filter blog posts based on active category and tag
+
+  // Filter blog posts based on the active category and tag
   const filteredBlogs = allBlogs.filter(blog => {
     const matchesCategory = activeCategory === 'All' || blog.category === activeCategory;
     const matchesTag = !activeTag || (blog.tags && blog.tags.includes(activeTag));
     return matchesCategory && matchesTag;
   });
-  
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading blog posts...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="blog-page">
       <div className="blog-header">
@@ -40,7 +68,7 @@ const Blog = () => {
           <p>Tutorials, insights, and updates for USC students learning web development and AI</p>
         </div>
       </div>
-      
+
       <div className="container">
         <div className="blog-filters">
           <div className="categories-filter">
@@ -60,7 +88,7 @@ const Blog = () => {
               ))}
             </div>
           </div>
-          
+
           {tags.length > 0 && (
             <div className="tags-filter">
               <h3>Popular Tags</h3>
@@ -78,20 +106,20 @@ const Blog = () => {
             </div>
           )}
         </div>
-        
+
         <div className="filter-summary">
           {activeCategory !== 'All' && (
             <div className="active-filter">
               <span>Category: {activeCategory}</span>
               <button 
                 className="clear-filter"
-                onClick={() => setActiveCategory('all')}
+                onClick={() => setActiveCategory('All')}
               >
                 ×
               </button>
             </div>
           )}
-          
+
           {activeTag && (
             <div className="active-filter">
               <span>Tag: #{activeTag}</span>
@@ -103,7 +131,7 @@ const Blog = () => {
               </button>
             </div>
           )}
-          
+
           {(activeCategory !== 'All' || activeTag) && (
             <button 
               className="clear-all-filters"
@@ -116,11 +144,12 @@ const Blog = () => {
             </button>
           )}
         </div>
-        
+
         <div className="blogs-grid">
           {filteredBlogs.length > 0 ? (
             filteredBlogs.map(blog => (
-              <BlogCard key={blog.id} blog={blog} />
+              // Note: adjust blog.id or blog._id based on your backend response
+              <BlogCard key={blog.id || blog._id} blog={blog} />
             ))
           ) : (
             <div className="no-results">
