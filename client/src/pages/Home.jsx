@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import "../styles/Home.css";
 
 import AINewsSection from "../components/AINewsSection";
-import { recentBlogs } from "../data/blogPosts"; // Keeping blogs as static data
+import RecentBlogs from "../components/RecentBlogs";
 
 const Home = () => {
-  const blogs = recentBlogs || [];
+
   const [news, setNews] = useState([]);
   const [loadingNews, setLoadingNews] = useState(true);
   const [newsError, setNewsError] = useState(null);
 
-  // Helper to extract a timestamp from the date field
+  // Helper: Extract timestamp from a date field (handles both string and MongoDB date objects)
   const getTimestamp = (date) => {
     if (typeof date === "string") {
       return new Date(date).getTime();
@@ -26,6 +26,7 @@ const Home = () => {
     return 0;
   };
 
+  // Fetch AI news from backend API
   useEffect(() => {
     fetch("http://localhost:5001/api/ai-news")
       .then((response) => {
@@ -127,8 +128,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Recent Blogs */}
-      {/* {blogs.length > 0 && <RecentBlogs blogs={blogs} />} */}
 
       {/* AI News Section */}
       {loadingNews ? (
