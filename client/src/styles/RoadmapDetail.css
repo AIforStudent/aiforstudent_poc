@@ -1,0 +1,197 @@
+/* src/styles/RoadmapDetail.css */
+
+/* General Page Styles */
+.roadmap-detail-page {
+  min-height: 100vh;
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+}
+
+/* Header Section */
+.roadmap-detail-header {
+  padding: var(--spacing-xxl) 0;
+  background-color: var(--dark-surface);
+  border-bottom: 1px solid var(--dark-border);
+}
+
+.roadmap-detail-header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.roadmap-detail-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.roadmap-detail-header p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Content Section */
+.roadmap-detail-content {
+  padding: var(--spacing-xxl) 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.roadmap-detail-image img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Roadmap Sections */
+.roadmap-section {
+  margin-bottom: var(--spacing-xxl);
+  padding-bottom: var(--spacing-xl);
+  border-bottom: 1px solid var(--dark-border);
+}
+
+.roadmap-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.roadmap-section h2 {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.roadmap-section p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Topics within Sections or Flat Topics */
+.topic-item {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  overflow: hidden;
+  border-left: 4px solid transparent;
+  transition: all 0.2s ease;
+  padding: var(--spacing-md);
+}
+
+.topic-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.topic-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-sm);
+}
+
+.topic-title {
+  font-size: 1.2rem;
+  margin: 0;
+  margin-bottom: var(--spacing-xs);
+}
+
+.topic-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.topic-title a:hover {
+  color: var(--usc-gold);
+}
+
+.topic-type {
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  display: inline-block;
+  margin-top: var(--spacing-xs);
+}
+
+/* Topic type colors */
+.topic-type.theoretical {
+  background-color: rgba(52, 152, 219, 0.2);
+  color: #3498DB;
+}
+
+.topic-type.practical {
+  background-color: rgba(155, 89, 182, 0.2);
+  color: #9B59B6;
+}
+
+.topic-type.prerequisite {
+  background-color: rgba(241, 196, 15, 0.2);
+  color: #F1C40F;
+}
+
+.topic-type.case-study {
+  background-color: rgba(26, 188, 156, 0.2);
+  color: #1ABC9C;
+}
+
+.topic-type.bonus {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #E74C3C;
+}
+
+.topic-description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* External Links within Topics */
+.topic-item a {
+  color: var(--usc-gold);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.topic-item a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .roadmap-detail-header,
+  .roadmap-detail-content {
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+  
+  .roadmap-detail-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .topic-item {
+    flex-direction: column;
+  }
+  
+  .topic-title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .roadmap-detail-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .roadmap-detail-header p,
+  .topic-description {
+    font-size: 1rem;
+  }
+}

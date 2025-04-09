@@ -1,0 +1,127 @@
+.roadmap-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--dark-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--dark-border);
+}
+
+.roadmap-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.roadmap-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.roadmap-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.roadmap-card:hover .roadmap-image img {
+  transform: scale(1.05);
+}
+
+.roadmap-content {
+  padding: var(--spacing-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.roadmap-audience {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.audience-label {
+  font-size: 0.9rem;
+  color: var(--usc-gold);
+  font-weight: 500;
+}
+
+.roadmap-title {
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.3rem;
+}
+
+.roadmap-title a {
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.roadmap-title a:hover {
+  color: var(--usc-gold);
+}
+
+.roadmap-description {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.roadmap-meta {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  border-top: 1px solid var(--dark-border);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.meta-icon {
+  margin-right: 6px;
+}
+
+.roadmap-link {
+  align-self: flex-start;
+  color: var(--usc-gold);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--spacing-sm);
+}
+
+.roadmap-link:hover {
+  transform: translateX(5px);
+}
+
+.roadmaps-placeholder {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .roadmaps-placeholder {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .roadmaps-placeholder {
+    grid-template-columns: 1fr;
+  }
+}
