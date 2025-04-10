@@ -1,33 +1,24 @@
 // src/components/RoadmapCard.jsx
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/RoadmapCard.css';
 
 const RoadmapCard = ({ roadmap }) => {
   if (!roadmap) return null;
-  
-  const {
-    id,
-    title,
-    description,
-    image,
-    audience,
-    resources,
-    difficulty,
-  } = roadmap;
+
+  const { id, title, description, image, audience, resources, difficulty } = roadmap;
 
   return (
     <div className="roadmap-card">
       {image && (
         <div className="roadmap-image">
-          <img 
-            src={image} 
+          <img
+            src={image}
             alt={title}
             onError={(e) => {
               e.target.src = `https://via.placeholder.com/400x225?text=${encodeURIComponent(title)}`;
               e.target.onerror = null;
-            }} 
+            }}
           />
         </div>
       )}
@@ -39,7 +30,6 @@ const RoadmapCard = ({ roadmap }) => {
           <Link to={`/roadmaps/${id}`}>{title}</Link>
         </h3>
         {description && <p className="roadmap-description">{description}</p>}
-        
         <div className="roadmap-meta">
           {resources && (
             <div className="meta-item">
@@ -54,7 +44,6 @@ const RoadmapCard = ({ roadmap }) => {
             </div>
           )}
         </div>
-        
         <Link to={`/roadmaps/${id}`} className="roadmap-link">
           Explore Path →
         </Link>

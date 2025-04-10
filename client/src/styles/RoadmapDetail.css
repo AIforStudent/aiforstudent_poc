@@ -1,0 +1,178 @@
+/* RoadmapDetail.css */
+.roadmap-detail-page {
+  background-color: #121212; /* Dark background */
+  color: #ffffff;            /* White text */
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+  padding-bottom: 40px;      /* Give some room at the bottom */
+}
+
+/* Header Section */
+.roadmap-detail-header {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #1e1e1e; 
+  margin-bottom: 40px;
+}
+.roadmap-detail-header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.roadmap-detail-header h1 {
+  font-size: 2.5rem;
+  color: #ff3c3c; /* Red accent for title */
+  margin-bottom: 1rem;
+}
+.roadmap-detail-header p {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #cccccc;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Roadmap Meta Info (optional if you want difficulty/resources in header) */
+.roadmap-meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+.roadmap-meta div {
+  background: #ff3c3c;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+/* Main Content Container */
+.roadmap-detail-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Roadmap Image */
+.roadmap-detail-image {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.roadmap-detail-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 2px solid #333;
+}
+
+/* Example: "Why This Roadmap?" Section */
+.why-this-roadmap {
+  background: #1e1e1e;
+  border: 1px solid #2c2c2c;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 40px;
+}
+.why-this-roadmap h2 {
+  font-size: 1.8rem;
+  color: #ff3c3c;
+  margin-bottom: 1rem;
+}
+.why-this-roadmap p {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* Roadmap Sections */
+.roadmap-section {
+  background: #1e1e1e;
+  border: 1px solid #2c2c2c;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 40px;
+}
+.roadmap-section h2 {
+  color: #ff3c3c;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+}
+.roadmap-section p {
+  color: #cccccc;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Topics inside each section */
+.section-topics {
+  margin-top: 20px;
+}
+.topic-item {
+  background: #2c2c2c;
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+.topic-item h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+.topic-item p {
+  margin-bottom: 4px;
+  color: #cccccc;
+}
+.topic-item a {
+  color: #ff3c3c;
+  text-decoration: none;
+  font-weight: 500;
+}
+.topic-item a:hover {
+  text-decoration: underline;
+}
+
+/* Additional resources example */
+.additional-resources {
+  background: #1e1e1e;
+  border: 1px solid #2c2c2c;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 40px;
+}
+.additional-resources h2 {
+  color: #ff3c3c;
+  margin-bottom: 16px;
+}
+
+/* CTA (Call to Action) */
+.ready-to-master {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.ready-to-master .cta-button {
+  background: #ff3c3c;
+  color: #ffffff;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.ready-to-master .cta-button:hover {
+  background: #ff4c4c;
+}
+
+/* Responsive tweaks (example) */
+@media (max-width: 768px) {
+  .roadmap-detail-header h1 {
+    font-size: 2rem;
+  }
+  .roadmap-detail-header p {
+    font-size: 1rem;
+  }
+  .roadmap-section h2 {
+    font-size: 1.3rem;
+  }
+}

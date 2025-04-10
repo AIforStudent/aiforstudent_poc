@@ -1,5 +1,8 @@
+# blueprints/roadmaps.py
 from flask import Blueprint, request, jsonify
-from models.roadmap import Roadmap
+from models.roadmap import Roadmap, serialize_roadmap
+from bson import ObjectId
+
 
 roadmaps = Blueprint('roadmaps', __name__)
 
@@ -7,15 +10,17 @@ roadmaps = Blueprint('roadmaps', __name__)
 def get_roadmaps():
     try:
         roadmap_list = Roadmap.objects()
-        return jsonify(roadmap_list), 200
+        data = [serialize_roadmap(r) for r in roadmap_list]
+        return jsonify(data), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 500
 
 @roadmaps.route('/<string:roadmap_id>', methods=['GET'])
 def get_roadmap(roadmap_id):
     try:
-        roadmap = Roadmap.objects.get(id=roadmap_id)
-        return jsonify(roadmap), 200
+        # Convert string ID to ObjectId
+        roadmap = Roadmap.objects.get(id=ObjectId(roadmap_id))
+        return jsonify(serialize_roadmap(roadmap)), 200
     except Roadmap.DoesNotExist:
         return jsonify({'message': 'Roadmap not found'}), 404
     except Exception as e:
@@ -26,7 +31,7 @@ def create_roadmap():
     data = request.get_json()
     try:
         roadmap = Roadmap(**data).save()
-        return jsonify(roadmap), 201
+        return jsonify(serialize_roadmap(roadmap)), 201
     except Exception as e:
         return jsonify({'message': str(e)}), 400
 
@@ -37,7 +42,7 @@ def update_roadmap(roadmap_id):
         roadmap = Roadmap.objects.get(id=roadmap_id)
         roadmap.update(**data)
         roadmap.reload()
-        return jsonify(roadmap), 200
+        return jsonify(serialize_roadmap(roadmap)), 200
     except Roadmap.DoesNotExist:
         return jsonify({'message': 'Roadmap not found'}), 404
     except Exception as e:

@@ -14,8 +14,8 @@ import CourseDetail from './pages/CourseDetail';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Roadmaps from './pages/Roadmaps';
-import RoadmapStem from './pages/RoadmapStem';
 import NewsPage from "./pages/NewsPage"; 
+import RoadmapDetail from './pages/RoadmapDetail';
 
 // Styles
 import './styles/global.css';
@@ -35,7 +35,7 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:blogId" element={<BlogPost />} />
           <Route path="/roadmaps" element={<Roadmaps />} />
-          <Route path="/roadmaps/stem" element={<RoadmapStem />} />
+          <Route path="/roadmaps/:roadmap_id" element={<RoadmapDetail />} />
           <Route path="/latest-news" element={<NewsPage />} /> 
         </Routes>
       </main>
