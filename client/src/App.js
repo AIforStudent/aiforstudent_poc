@@ -16,6 +16,7 @@ import BlogPost from './pages/BlogPost';
 import Roadmaps from './pages/Roadmaps';
 import NewsPage from "./pages/NewsPage"; 
 import RoadmapDetail from './pages/RoadmapDetail';
+import AdminDashboard from './pages/AdminDashboard';
 
 // Styles
 import './styles/global.css';
@@ -37,6 +38,7 @@ function App() {
           <Route path="/roadmaps" element={<Roadmaps />} />
           <Route path="/roadmaps/:roadmap_id" element={<RoadmapDetail />} />
           <Route path="/latest-news" element={<NewsPage />} /> 
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </main>
       <Footer />
