@@ -8,7 +8,7 @@ def serialize(doc):
     """Convert a MongoEngine document (or QuerySet) to a Python dict/list."""
     return json.loads(doc.to_json())
 
-@ai_news.route('/', methods=['GET'])
+@ai_news.route('/', methods=['GET'], strict_slashes=False)
 def get_ai_news():
     try:
         news_items = AINews.objects()
@@ -18,7 +18,7 @@ def get_ai_news():
     except Exception as e:
         return jsonify({'message': str(e)}), 500
 
-@ai_news.route('/<string:news_id>', methods=['GET'])
+@ai_news.route('/<string:news_id>', methods=['GET'], strict_slashes=False)
 def get_news_item(news_id):
     try:
         news_item = AINews.objects.get(id=news_id)
@@ -28,7 +28,7 @@ def get_news_item(news_id):
     except Exception as e:
         return jsonify({'message': str(e)}), 500
 
-@ai_news.route('/', methods=['POST'])
+@ai_news.route('/', methods=['POST'], strict_slashes=False)
 def create_news_item():
     data = request.get_json()
     try:
@@ -38,7 +38,7 @@ def create_news_item():
     except Exception as e:
         return jsonify({'message': str(e)}), 400
 
-@ai_news.route('/<string:news_id>', methods=['PUT'])
+@ai_news.route('/<string:news_id>', methods=['PUT'], strict_slashes=False)
 def update_news_item(news_id):
     data = request.get_json()
     try:
@@ -51,7 +51,7 @@ def update_news_item(news_id):
     except Exception as e:
         return jsonify({'message': str(e)}), 400
 
-@ai_news.route('/<string:news_id>', methods=['DELETE'])
+@ai_news.route('/<string:news_id>', methods=['DELETE'], strict_slashes=False)
 def delete_news_item(news_id):
     try:
         news_item = AINews.objects.get(id=news_id)
