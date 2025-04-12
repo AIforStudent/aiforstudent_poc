@@ -17,6 +17,11 @@ import Roadmaps from './pages/Roadmaps';
 import NewsPage from "./pages/NewsPage"; 
 import RoadmapDetail from './pages/RoadmapDetail';
 import AdminDashboard from './pages/AdminDashboard';
+import About from './pages/About';
+import AboutProject from './pages/AboutProject';
+import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 // Styles
 import './styles/global.css';
@@ -39,6 +44,11 @@ function App() {
           <Route path="/roadmaps/:roadmap_id" element={<RoadmapDetail />} />
           <Route path="/latest-news" element={<NewsPage />} /> 
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/about-project" element={<AboutProject />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
         </Routes>
       </main>
       <Footer />

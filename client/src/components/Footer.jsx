@@ -1,50 +1,62 @@
 // src/components/Footer.jsx
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [roadmaps, setRoadmaps] = useState([]);
+
+  useEffect(() => {
+    async function fetchRoadmaps() {
+      try {
+        const res = await fetch('http://127.0.0.1:5001/api/roadmaps');
+        if (!res.ok) {
+          throw new Error('Failed to fetch roadmaps');
+        }
+        const data = await res.json();
+        setRoadmaps(data.slice(0, 5)); // Get only first 5 roadmaps for footer
+      } catch (err) {
+        console.error('Error fetching roadmaps for footer:', err);
+      }
+    }
+    fetchRoadmaps();
+  }, []);
 
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <img src="/images/logo.png" alt="USC Learning Portal" className="footer-logo" />
-            <h3>USC Learning Portal</h3>
+            <img src="/images/home-page/usc-logo.png" alt="AI for Students" className="footer-logo" />
+            <h3>AI for Students</h3>
             <p>
-              Level up your coding skills with our comprehensive learning paths,
-              designed specifically for USC students.
+              Free learning paths and resources to help students master programming, AI, 
+              and other tech skills with carefully curated content.
             </p>
             <div className="social-links">
-              <a href="https://twitter.com/usc" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-twitter"></i>
+              <a href="https://twitter.com/USC" target="_blank" rel="noopener noreferrer">
+                <i className="fa-brands fa-twitter fa-lg"></i>
               </a>
-              <a href="https://facebook.com/usc" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-facebook"></i>
-              </a>
-              <a href="https://instagram.com/usc" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a href="https://linkedin.com/school/university-of-southern-california" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-linkedin"></i>
-              </a>
-              <a href="https://github.com/usc" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-github"></i>
+              <a href="https://www.usc.edu" target="_blank" rel="noopener noreferrer">
+                <i className="fa-solid fa-globe fa-lg"></i>
               </a>
             </div>
           </div>
 
           <div className="footer-links">
-            <h4>Learning Paths</h4>
+            <h4>Learning Roadmaps</h4>
             <ul>
-              <li><Link to="/courses/frontend-developer">Frontend Developer</Link></li>
-              <li><Link to="/courses/ai-engineer">AI Engineer</Link></li>
-              <li><Link to="/courses/full-stack">Full Stack Developer</Link></li>
-              <li><Link to="/courses/data-science">Data Science</Link></li>
-              <li><Link to="/courses/cybersecurity">Cybersecurity</Link></li>
+              {roadmaps.length > 0 ? (
+                roadmaps.map(roadmap => (
+                  <li key={roadmap.id}>
+                    <Link to={`/roadmaps/${roadmap.id}`}>{roadmap.title}</Link>
+                  </li>
+                ))
+              ) : (
+                <li><Link to="/roadmaps">Browse All Roadmaps</Link></li>
+              )}
             </ul>
           </div>
 
@@ -52,19 +64,16 @@ const Footer = () => {
             <h4>Resources</h4>
             <ul>
               <li><Link to="/blog">Blog</Link></li>
-              <li><Link to="/tutorials">Tutorials</Link></li>
-              <li><Link to="/projects">Projects</Link></li>
-              <li><Link to="/community">Community</Link></li>
-              <li><Link to="/events">Events</Link></li>
+              <li><Link to="/news">AI News</Link></li>
+              <li><Link to="/courses">Courses</Link></li>
             </ul>
           </div>
 
           <div className="footer-links">
-            <h4>Company</h4>
+            <h4>About</h4>
             <ul>
-              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/about">About This Project</Link></li>
               <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/careers">Careers</Link></li>
               <li><Link to="/privacy">Privacy Policy</Link></li>
               <li><Link to="/terms">Terms of Service</Link></li>
             </ul>
@@ -72,10 +81,10 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {currentYear} USC Learning Portal. All rights reserved.</p>
+          <p>&copy; {currentYear} AI for Students - A Free Educational Resource</p>
           <p>
-            A project for University of Southern California students. 
-            Not affiliated with or endorsed by Scrimba, Mozilla MDN, or other platforms.
+            Open-source project created to help students learn programming and AI.
+            All learning content is freely available for anyone's use.
           </p>
         </div>
       </div>
