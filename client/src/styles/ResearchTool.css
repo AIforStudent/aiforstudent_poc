@@ -1,0 +1,287 @@
+/* Research Tool Styles */
+.research-tool-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.research-tool-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.research-tool-header h1 {
+  color: var(--usc-gold);
+  margin-bottom: 1rem;
+}
+
+.research-tool-description {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+}
+
+.research-tool-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Tool Finder Section */
+.tool-finder-section {
+  background-color: var(--dark-surface);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.tool-finder-section h2 {
+  color: var(--usc-gold);
+  margin-bottom: 1.5rem;
+}
+
+.prompt-form {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.prompt-input-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.prompt-input {
+  flex: 1;
+  padding: 1rem;
+  background-color: var(--dark-bg);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.prompt-input:focus {
+  outline: none;
+  border-color: var(--usc-gold);
+}
+
+.prompt-submit-btn {
+  padding: 0 1.5rem;
+  background-color: var(--usc-cardinal);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.prompt-submit-btn:hover {
+  background-color: var(--usc-cardinal-dark);
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 204, 0, 0.2);
+  border-top: 5px solid var(--usc-gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Results Container */
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.results-summary {
+  background-color: rgba(255, 204, 0, 0.1);
+  padding: 1rem;
+  border-left: 4px solid var(--usc-gold);
+  border-radius: var(--radius-sm);
+}
+
+.results-summary h3 {
+  color: var(--usc-gold);
+  margin-bottom: 0.5rem;
+}
+
+.tool-rankings h3 {
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.ranked-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.tool-card {
+  background-color: var(--dark-bg);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--dark-border);
+}
+
+.tool-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tool-card.top-recommendation {
+  border: 1px solid var(--usc-gold);
+  background-color: rgba(153, 0, 0, 0.1);
+}
+
+.tool-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.tool-card-header h4 {
+  margin: 0;
+  color: var(--usc-gold);
+}
+
+.tool-score {
+  background-color: var(--usc-cardinal);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.tool-features {
+  margin: 1rem 0;
+}
+
+.tool-features ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.tool-features li {
+  margin-bottom: 0.25rem;
+}
+
+.tool-metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Tool Comparison Section */
+.tool-comparison-section {
+  background-color: var(--dark-surface);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.tool-comparison-section h2 {
+  color: var(--usc-gold);
+  margin-bottom: 1.5rem;
+}
+
+.comparison-table-container {
+  overflow-x: auto;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.comparison-table th {
+  background-color: var(--usc-cardinal);
+  color: white;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  white-space: nowrap;
+}
+
+.comparison-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--dark-border);
+}
+
+.comparison-table tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* AI Prompt Interface */
+.ai-prompt-interface {
+  background-color: var(--dark-surface);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.ai-prompt-interface h2 {
+  color: var(--usc-gold);
+  margin-bottom: 1.5rem;
+}
+
+.chat-interface {
+  background-color: var(--dark-bg);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.chat-info {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.chat-coming-soon {
+  background-color: var(--usc-cardinal);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-sm);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .prompt-input-container {
+    flex-direction: column;
+  }
+  
+  .ranked-tools {
+    grid-template-columns: 1fr;
+  }
+}

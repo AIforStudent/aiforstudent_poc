@@ -27,7 +27,7 @@ const Navbar = () => {
           <Link to="/blog" className="nav-link">Blogs</Link>
           <Link to="/Roadmaps" className="nav-link">Roadmaps</Link>
           <Link to="/latest-news" className="nav-link">News</Link> {/* ✅ Updated Route */}
-
+          <Link to="/research-tool" className="nav-link">Scholar.AI Bot</Link>
         </div>
 
         <div className="nav-actions">
@@ -51,6 +51,7 @@ const Navbar = () => {
             <Link to="/blog" className="nav-link" onClick={() => setIsMenuOpen(false)}>Blogs</Link>
             <Link to="/Roadmaps" className="nav-link" onClick={() => setIsMenuOpen(false)}>Roadmaps</Link>
             <Link to="/News" className="nav-link" onClick={() => setIsMenuOpen(false)}>News</Link>
+            <Link to="/research-tool" className="nav-link" onClick={() => setIsMenuOpen(false)}>Scholar.AI Bot</Link>
             <div className="mobile-menu-footer">
               <button className="button">Sign In</button>
             </div>
