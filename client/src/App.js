@@ -22,6 +22,7 @@ import AboutProject from './pages/AboutProject';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import ResearchTool from './pages/ResearchTool';
 
 // Styles
 import './styles/global.css';
@@ -43,6 +44,7 @@ function App() {
           <Route path="/roadmaps" element={<Roadmaps />} />
           <Route path="/roadmaps/:roadmap_id" element={<RoadmapDetail />} />
           <Route path="/latest-news" element={<NewsPage />} /> 
+          <Route path="/research-tool" element={<ResearchTool />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/about-project" element={<AboutProject />} />
