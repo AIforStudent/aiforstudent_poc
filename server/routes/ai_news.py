@@ -11,7 +11,8 @@ def serialize(doc):
 @ai_news.route('/', methods=['GET'], strict_slashes=False)
 def get_ai_news():
     try:
-        news_items = AINews.objects()
+        # Sort by date in descending order (newest first)
+        news_items = AINews.objects().order_by('-date')
         # Convert QuerySet to a JSON serializable Python object
         news_data = serialize(news_items)
         return jsonify(news_data), 200
