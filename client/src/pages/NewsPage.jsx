@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/NewsPage.css";
+import { status } from "express/lib/response";
 
 // Helper function to format the date
 const formatDate = (date) => {
@@ -26,7 +27,7 @@ const NewsPage = () => {
 
   // Fetch news from backend when component mounts
   useEffect(() => {
-    fetch('http://localhost:5001/api/ai-news')
+    fetch(`${process.env.REACT_APP_API_URL}/api/ai-news`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

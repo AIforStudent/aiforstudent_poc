@@ -12,7 +12,8 @@ const Courses = () => {
 
   // Fetch courses from the backend
   useEffect(() => {
-    fetch('http://localhost:5001/api/courses')
+    fetch(`${process.env.REACT_APP_API_URL}/api/courses`)
+    // fetch('http://localhost:5001/api/courses')
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
