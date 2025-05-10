@@ -3,3 +3,4 @@ Flask-Cors
 Flask-MongoEngine
 python-dotenv
 mongoengine
+feedparser
