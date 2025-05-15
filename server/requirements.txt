@@ -6,4 +6,4 @@ mongoengine
 schedule
 feedparser
 requests
-bs4git
+bs4
