@@ -12,7 +12,8 @@ const Courses = () => {
 
   // Fetch courses from the backend
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/courses`)
+    // fetch(`${process.env.REACT_APP_API_URL}/api/courses`)
+    fetch('https://aiforstudent-poc.onrender.com/api/courses/')
     // fetch('http://localhost:5001/api/courses')
       .then(response => {
         if (!response.ok) {

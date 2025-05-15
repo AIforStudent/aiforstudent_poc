@@ -14,7 +14,8 @@ const Blog = () => {
   useEffect(() => {
     async function fetchBlogs() {
       try {
-        const res = await fetch('http://127.0.0.1:5001/api/blogs');
+        // const res = await fetch('http://127.0.0.1:5001/api/blogs');
+        const res = await fetch('https://aiforstudent-poc.onrender.com/api/blogs/');
         if (!res.ok) throw new Error('Failed to fetch blog posts');
         const data = await res.json();
         setBlogs(data);

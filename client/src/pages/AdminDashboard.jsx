@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -6,7 +5,7 @@ const API_BASE = `${process.env.REACT_APP_API_URL || "http://localhost:5001"}/ap
 
 const collections = {
   "ai-news": ["title", "excerpt", "link", "date", "source", "author", "image"],
-  "blogs": ["title", "excerpt", "content", "author", "date"],
+  "blogs": ["title", "excerpt", "coverImage", "category", "author.name", "author.avatar", "author.title", "date", "readTime", "tags", "externalLink"],
   "courses": ["title", "description", "link", "image"],
   "roadmaps": ["title", "steps", "image"]
 };
@@ -39,23 +38,38 @@ function AdminDashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {};
-    collections[selectedCollection].forEach(field => {
-      payload[field] = form[field] && form[field].trim() !== "" ? form[field] : null;
-    });
-    if (selectedCollection === "ai-news" && !payload.date) {
-      payload.date = new Date().toISOString(); // ensure date exists
+
+    for (const field of collections[selectedCollection]) {
+      const val = form[field]?.trim?.() || null;
+
+      if (selectedCollection === "blogs") {
+        if (field === "tags") {
+          payload.tags = val ? val.split(",").map(tag => tag.trim()) : [];
+        } else if (field.startsWith("author.")) {
+          payload.author = payload.author || {};
+          const subfield = field.split(".")[1];
+          payload.author[subfield] = val;
+        } else if (field === "readTime") {
+          payload.readTime = val ? parseInt(val) : 0;
+        } else if (field === "date") {
+          payload.date = val ? new Date(val).toISOString() : new Date().toISOString();
+        } else {
+          payload[field] = val;
+        }
+      } else {
+        payload[field] = val;
+      }
     }
-    if (!payload.title || payload.title === "") {
+
+    if (!payload.title) {
       alert("Title is required");
       return;
     }
 
     try {
-      if (editId) {
-        await axios.put(`${API_BASE}/${selectedCollection}/${editId}`, payload);
-      } else {
-        await axios.post(`${API_BASE}/${selectedCollection}`, payload);
-      }
+      const url = `${API_BASE}/${selectedCollection}` + (editId ? `/${editId}` : "");
+      const method = editId ? axios.put : axios.post;
+      await method(url, payload);
       setForm({});
       setEditId(null);
       fetchData();
@@ -66,20 +80,32 @@ function AdminDashboard() {
   };
 
   const handleEdit = (item) => {
-    setForm(item);
-    setEditId(item._id?.$oid || item._id || item.id);
+    try {
+      const id = getId(item);
+      if (!id) throw new Error("Invalid ID structure");
+      setForm(item);
+      setEditId(id);
+    } catch (err) {
+      console.error("Failed to initiate edit:", err);
+      alert("This entry cannot be edited due to data issues.");
+    }
   };
 
   const handleDelete = async (id) => {
     try {
+      if (!id) throw new Error("Invalid ID");
       await axios.delete(`${API_BASE}/${selectedCollection}/${id}`);
       fetchData();
     } catch (error) {
       console.error("Delete failed:", error);
+      alert("Delete failed. Check console.");
     }
   };
 
-  const getId = (item) => item._id?.$oid || item._id || item.id;
+  const getId = (item) => {
+    if (item._id && typeof item._id === 'object' && '$oid' in item._id) return item._id.$oid;
+    return item._id || item.id || null;
+  };
 
   return (
     <div className="p-8 bg-black text-white min-h-screen">
