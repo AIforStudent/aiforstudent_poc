@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_BASE = `${process.env.REACT_APP_API_URL || "http://localhost:5001"}/api`;
+const API_BASE = 'https://aiforstudent-poc.onrender.com/api'
 
 const collections = {
   "ai-news": ["title", "excerpt", "link", "date", "source", "author", "image"],
@@ -18,7 +18,7 @@ function AdminDashboard() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${API_BASE}/${selectedCollection}`);
+      const res = await axios.get(`${API_BASE}/${selectedCollection}/`);
       setData(res.data);
     } catch (error) {
       console.error("Failed to fetch:", error);
@@ -67,7 +67,7 @@ function AdminDashboard() {
     }
 
     try {
-      const url = `${API_BASE}/${selectedCollection}` + (editId ? `/${editId}` : "");
+      const url = `${API_BASE}/${selectedCollection}/` + (editId ? `/${editId}` : "");
       const method = editId ? axios.put : axios.post;
       await method(url, payload);
       setForm({});
