@@ -16,6 +16,7 @@ import BlogPost from './pages/BlogPost';
 import Roadmaps from './pages/Roadmaps';
 import NewsPage from "./pages/NewsPage"; 
 import RoadmapDetail from './pages/RoadmapDetail';
+import Admin from './pages/Admin';
 import AdminDashboard from './pages/AdminDashboard';
 import About from './pages/About';
 import AboutProject from './pages/AboutProject';
@@ -45,7 +46,8 @@ function App() {
           <Route path="/roadmaps/:roadmap_id" element={<RoadmapDetail />} />
           <Route path="/latest-news" element={<NewsPage />} /> 
           <Route path="/research-tool" element={<ResearchTool />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/about-project" element={<AboutProject />} />
           <Route path="/contact" element={<Contact />} />

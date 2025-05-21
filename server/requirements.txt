@@ -139,9 +139,5 @@ wirerope==1.0.0
 wrapt==1.17.2
 WTForms==3.2.1
 zipp==3.21.0
-Flask
-Flask-Cors
-Flask-MongoEngine
-python-dotenv
-mongoengine
-feedparser
+Flask-SQLAlchemy==3.1.1
+Flask-Bcrypt==1.0.1

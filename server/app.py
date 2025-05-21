@@ -3,13 +3,27 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from mongoengine import connect
 from dotenv import load_dotenv
-from models.ai_news import AINews  # Import the AINews model
-from scripts.fetch_ai_news import fetch_ai_news  # Import the fetch_ai_news function
+from models.ai_news import AINews
+from scripts.fetch_ai_news import fetch_ai_news
+from models.user import bcrypt
 
 load_dotenv() 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:3000", "https://your-production-domain.com"],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": True
+    }
+})
+
+# Configure Flask
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-here')  # Change this in production!
+
+# Initialize bcrypt
+bcrypt.init_app(app)
 
 # Connect to MongoDB using the URI from .env
 MONGO_URI = os.getenv("MONGO_URI")
@@ -20,12 +34,15 @@ from routes.blogs import blogs
 from routes.courses import courses
 from routes.roadmaps import roadmaps
 from routes.ai_news import ai_news
+from routes.auth import auth_bp
+from routes.admin import admin_bp
 
 app.register_blueprint(blogs, url_prefix="/api/blogs")
 app.register_blueprint(courses, url_prefix="/api/courses")
 app.register_blueprint(roadmaps, url_prefix="/api/roadmaps")
 app.register_blueprint(ai_news, url_prefix="/api/ai-news")
-
+app.register_blueprint(auth_bp)
+app.register_blueprint(admin_bp)
 
 @app.route("/api/fetch-and-save-news", methods=["POST"])
 def fetch_and_save_news():
@@ -43,9 +60,6 @@ def fetch_and_save_news():
 
     except Exception as e:
         return jsonify({"message": f"An error occurred: {str(e)}"}), 500
-
-
-
 
 @app.route("/")
 def index():

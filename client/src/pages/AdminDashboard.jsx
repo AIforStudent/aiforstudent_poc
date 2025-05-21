@@ -1,6 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/Admin.css';
 
 const API_BASE = "http://localhost:5001/api";
 
@@ -12,10 +13,28 @@ const collections = {
 };
 
 function AdminDashboard() {
+  const navigate = useNavigate();
   const [selectedCollection, setSelectedCollection] = useState("ai-news");
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
   const [editId, setEditId] = useState(null);
+
+  useEffect(() => {
+    // Check if user is authenticated
+    const checkAuth = async () => {
+      try {
+        const response = await axios.get('/api/auth/check', { withCredentials: true });
+        if (!response.data.isAdmin) {
+          navigate('/admin');
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        navigate('/admin');
+      }
+    };
+    checkAuth();
+    fetchData();
+  }, [navigate]);
 
   const fetchData = async () => {
     try {
@@ -79,11 +98,25 @@ function AdminDashboard() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await axios.get('/api/auth/logout', { withCredentials: true });
+      navigate('/admin');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
   const getId = (item) => item._id?.$oid || item._id || item.id;
 
   return (
     <div className="p-8 bg-black text-white min-h-screen">
-      <h1 className="text-4xl font-bold mb-6">🛠️ Admin Dashboard</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-4xl font-bold">🛠️ Admin Dashboard</h1>
+        <button onClick={handleLogout} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+          Logout
+        </button>
+      </div>
 
       <div className="mb-6">
         <label className="mr-2">Select Collection:</label>
