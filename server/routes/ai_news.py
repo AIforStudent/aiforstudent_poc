@@ -1,6 +1,7 @@
 import json
 from flask import Blueprint, request, jsonify
 from models.ai_news import AINews
+from datetime import datetime
 
 ai_news = Blueprint('ai_news', __name__)
 
@@ -32,6 +33,12 @@ def get_news_item(news_id):
 @ai_news.route('/', methods=['POST'], strict_slashes=False)
 def create_news_item():
     data = request.get_json()
+    data = request.get_json()
+    if 'date' in data:
+        try:
+            data['date'] = datetime.fromisoformat(data['date'].replace("Z", ""))
+        except Exception:
+            return jsonify({'message': 'Invalid date format'}), 400
     try:
         news_item = AINews(**data).save()
         # Convert the saved document to a Python dict
@@ -42,6 +49,11 @@ def create_news_item():
 @ai_news.route('/<string:news_id>', methods=['PUT'], strict_slashes=False)
 def update_news_item(news_id):
     data = request.get_json()
+    if 'date' in data:
+        try:
+            data['date'] = datetime.fromisoformat(data['date'].replace("Z", ""))
+        except Exception:
+            return jsonify({'message': 'Invalid date format'}), 400
     try:
         news_item = AINews.objects.get(id=news_id)
         news_item.update(**data)

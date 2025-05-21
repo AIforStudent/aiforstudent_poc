@@ -11,7 +11,8 @@ const RoadmapDetail = () => {
   useEffect(() => {
     async function fetchRoadmap() {
       try {
-        const res = await fetch(`http://127.0.0.1:5001/api/roadmaps/${roadmap_id}`);
+        // const res = await fetch(`http://127.0.0.1:5001/api/roadmaps/${roadmap_id}`);
+        const res = await fetch(`https://aiforstudent-poc.onrender.com/api/roadmaps/${roadmap_id}`);
         if (!res.ok) throw new Error('Failed to fetch roadmap');
         const data = await res.json();
         setRoadmap(data);

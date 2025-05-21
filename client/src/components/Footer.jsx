@@ -11,7 +11,8 @@ const Footer = () => {
   useEffect(() => {
     async function fetchRoadmaps() {
       try {
-        const res = await fetch('http://127.0.0.1:5001/api/roadmaps');
+        // const res = await fetch('http://127.0.0.1:5001/api/roadmaps');
+        const res = await fetch('https://aiforstudent-poc.onrender.com/api/roadmaps/');
         if (!res.ok) {
           throw new Error('Failed to fetch roadmaps');
         }

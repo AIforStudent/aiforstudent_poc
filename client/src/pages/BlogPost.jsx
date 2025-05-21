@@ -11,7 +11,8 @@ const BlogPost = () => {
     async function fetchBlog() {
       try {
         // Fetch individual blog post by id from the backend API
-        const resBlog = await fetch(`http://127.0.0.1:5001/api/blogs/${blogId}`);
+        // const resBlog = await fetch(`http://127.0.0.1:5001/api/blogs/${blogId}`);
+        const resBlog = await fetch(`https://aiforstudent-poc.onrender.com/api/blogs/${blogId}`);
         if (!resBlog.ok) {
           throw new Error("Failed to fetch blog post");
         }

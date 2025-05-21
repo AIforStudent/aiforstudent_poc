@@ -28,7 +28,8 @@ const Home = () => {
 
   // Fetch AI news from backend API
   useEffect(() => {
-    fetch("http://localhost:5001/api/ai-news")
+    // fetch("http://localhost:5001/api/ai-news")
+    fetch(`https://aiforstudent-poc.onrender.com/api/ai-news/`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
