@@ -6,21 +6,39 @@ from dotenv import load_dotenv
 from models.ai_news import AINews
 from scripts.fetch_ai_news import fetch_ai_news
 from models.user import bcrypt
+from flask_session import Session
 
 load_dotenv() 
 
 app = Flask(__name__)
+
+# Configure Flask Session
+app.config['SESSION_TYPE'] = 'mongodb'
+app.config['SESSION_MONGODB'] = connect(host=os.getenv("MONGO_URI"))
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+app.config['PERMANENT_SESSION_LIFETIME'] = 86400  # 24 hours
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-here')
+
+# Initialize Session
+Session(app)
+
+# Configure CORS
 CORS(app, supports_credentials=True, resources={
     r"/api/*": {
-        "origins": ["http://localhost:3000", "https://your-production-domain.com"],
+        "origins": [
+            "http://localhost:3000",
+            "https://aiforstudent-poc.onrender.com",
+            "https://aiforstudent-poc.vercel.app"
+        ],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
-        "supports_credentials": True
+        "supports_credentials": True,
+        "expose_headers": ["Content-Type", "Authorization"],
+        "max_age": 600
     }
 })
-
-# Configure Flask
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-here')  # Change this in production!
 
 # Initialize bcrypt
 bcrypt.init_app(app)

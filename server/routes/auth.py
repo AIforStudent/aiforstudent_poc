@@ -20,36 +20,60 @@ def admin_required(f):
 
 @auth_bp.route('/api/auth/check', methods=['GET'])
 def check_auth():
-    if not session.get('user_id'):
-        return jsonify({'isAdmin': False})
-    
-    user = User.objects(id=session['user_id']).first()
-    return jsonify({'isAdmin': bool(user and user.is_admin)})
+    try:
+        if not session.get('user_id'):
+            return jsonify({'isAdmin': False, 'authenticated': False})
+        
+        user = User.objects(id=session['user_id']).first()
+        return jsonify({
+            'isAdmin': bool(user and user.is_admin),
+            'authenticated': bool(user),
+            'username': user.username if user else None
+        })
+    except Exception as e:
+        print(f"Auth check error: {str(e)}")
+        return jsonify({'isAdmin': False, 'authenticated': False, 'error': str(e)}), 500
 
 @auth_bp.route('/api/auth/login', methods=['POST'])
 def login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
-    
-    user = User.objects(username=username).first()
-    
-    if user and user.check_password(password):
-        session['user_id'] = str(user.id)
-        user.last_login = datetime.utcnow()
-        user.save()
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'success': False, 'error': 'No data provided'}), 400
+
+        username = data.get('username')
+        password = data.get('password')
+        
+        if not username or not password:
+            return jsonify({'success': False, 'error': 'Username and password are required'}), 400
+        
+        user = User.objects(username=username).first()
+        
+        if user and user.check_password(password):
+            session['user_id'] = str(user.id)
+            session.permanent = True
+            user.last_login = datetime.utcnow()
+            user.save()
+            
+            return jsonify({
+                'success': True,
+                'isAdmin': user.is_admin,
+                'username': user.username
+            })
         
         return jsonify({
-            'success': True,
-            'isAdmin': user.is_admin
-        })
-    
-    return jsonify({
-        'success': False,
-        'error': 'Invalid username or password'
-    }), 401
+            'success': False,
+            'error': 'Invalid username or password'
+        }), 401
+    except Exception as e:
+        print(f"Login error: {str(e)}")
+        return jsonify({'success': False, 'error': 'An error occurred during login'}), 500
 
 @auth_bp.route('/api/auth/logout', methods=['GET'])
 def logout():
-    session.pop('user_id', None)
-    return jsonify({'success': True}) 
+    try:
+        session.clear()
+        return jsonify({'success': True})
+    except Exception as e:
+        print(f"Logout error: {str(e)}")
+        return jsonify({'success': False, 'error': 'An error occurred during logout'}), 500 
