@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Admin.css';
 
-const API_BASE = 'https://aiforstudent-poc.onrender.com/api'
+// Use environment variable for API base URL
+const API_BASE = process.env.REACT_APP_API_URL || 'https://aiforstudent-poc.onrender.com/api';
+
+// Configure axios defaults
+axios.defaults.withCredentials = true;
 
 const collections = {
   "ai-news": ["title", "excerpt", "link", "date", "source", "author", "image"],
@@ -18,18 +22,30 @@ function AdminDashboard() {
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
   const [editId, setEditId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Check if user is authenticated
     const checkAuth = async () => {
       try {
-        const response = await axios.get('/api/auth/check', { withCredentials: true });
+        setIsLoading(true);
+        const response = await axios.get(`${API_BASE}/auth/check`, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+        
         if (!response.data.isAdmin) {
           navigate('/admin');
         }
       } catch (error) {
         console.error('Auth check failed:', error);
+        setError('Authentication failed. Please log in again.');
         navigate('/admin');
+      } finally {
+        setIsLoading(false);
       }
     };
     checkAuth();
@@ -38,10 +54,19 @@ function AdminDashboard() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${API_BASE}/${selectedCollection}/`);
+      setIsLoading(true);
+      const res = await axios.get(`${API_BASE}/${selectedCollection}/`, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
       setData(res.data);
     } catch (error) {
       console.error("Failed to fetch:", error);
+      setError('Failed to fetch data. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -87,15 +112,23 @@ function AdminDashboard() {
     }
 
     try {
+      setIsLoading(true);
       const url = `${API_BASE}/${selectedCollection}/` + (editId ? `/${editId}` : "");
       const method = editId ? axios.put : axios.post;
-      await method(url, payload);
+      await method(url, payload, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
       setForm({});
       setEditId(null);
       fetchData();
     } catch (error) {
       console.error("Error saving:", error.response?.data || error);
-      alert("Failed to save. Check console.");
+      setError('Failed to save. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -114,19 +147,37 @@ function AdminDashboard() {
   const handleDelete = async (id) => {
     try {
       if (!id) throw new Error("Invalid ID");
-      await axios.delete(`${API_BASE}/${selectedCollection}/${id}`);
+      setIsLoading(true);
+      await axios.delete(`${API_BASE}/${selectedCollection}/${id}`, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
       fetchData();
     } catch (error) {
       console.error("Delete failed:", error);
+      setError('Failed to delete. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleLogout = async () => {
     try {
-      await axios.get('/api/auth/logout', { withCredentials: true });
+      setIsLoading(true);
+      await axios.get(`${API_BASE}/auth/logout`, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
       navigate('/admin');
     } catch (error) {
       console.error('Logout failed:', error);
+      setError('Logout failed. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -134,6 +185,25 @@ function AdminDashboard() {
     if (item._id && typeof item._id === 'object' && '$oid' in item._id) return item._id.$oid;
     return item._id || item.id || null;
   };
+
+  if (isLoading) {
+    return (
+      <div className="p-8 bg-black text-white min-h-screen flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-8 bg-black text-white min-h-screen">
+        <div className="bg-red-600 p-4 rounded mb-4">{error}</div>
+        <button onClick={() => setError(null)} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+          Try Again
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="p-8 bg-black text-white min-h-screen">
@@ -173,8 +243,9 @@ function AdminDashboard() {
           <button
             type="submit"
             className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
+            disabled={isLoading}
           >
-            Save
+            {isLoading ? 'Saving...' : 'Save'}
           </button>
         </form>
       </div>
@@ -190,12 +261,14 @@ function AdminDashboard() {
               <button
                 onClick={() => handleEdit(item)}
                 className="bg-yellow-500 hover:bg-yellow-600 text-black px-3 py-1 rounded"
+                disabled={isLoading}
               >
                 Edit
               </button>
               <button
                 onClick={() => handleDelete(getId(item))}
                 className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+                disabled={isLoading}
               >
                 Delete
               </button>
