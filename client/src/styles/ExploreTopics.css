@@ -1,0 +1,159 @@
+/* AI Topics Section */
+.ai-topics-section {
+  padding: 80px 0;
+  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 2.8rem;
+  color: #990000;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.section-subtitle {
+  font-size: 1.3rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  margin-top: 50px;
+}
+
+.topic-card {
+  background: white;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.topic-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(153, 0, 0, 0.15);
+  border-color: #990000;
+}
+
+.topic-card.expanded {
+  border-color: #990000;
+  box-shadow: 0 15px 35px rgba(153, 0, 0, 0.2);
+}
+
+.topic-card-content {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.topic-icon {
+  background: linear-gradient(135deg, #990000, #b30000);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.topic-title {
+  flex: 1;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.topic-arrow {
+  color: #990000;
+  transition: transform 0.3s ease;
+}
+
+.topic-card:hover .topic-arrow {
+  transform: translateX(5px);
+}
+
+.topic-description {
+  padding: 0 30px 30px;
+  border-top: 1px solid #e9ecef;
+  margin-top: 10px;
+}
+
+.topic-description p {
+  color: #666;
+  line-height: 1.6;
+  margin: 20px 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.topic-link {
+  color: #990000;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.topic-link:hover {
+  color: #b30000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .topics-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .topic-card-content {
+    padding: 25px;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  .ai-topics-section {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .topic-card-content {
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .topic-title {
+    font-size: 1.1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
+}

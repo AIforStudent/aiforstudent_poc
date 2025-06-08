@@ -4,6 +4,7 @@ import "../styles/Home.css";
 
 import AINewsSection from "../components/AINewsSection";
 import RecentBlogs from "../components/RecentBlogs";
+import ExploreTopics from "../components/ExploreTopics";
 
 const Home = () => {
 
@@ -129,6 +130,7 @@ const Home = () => {
         </div>
       </section>
 
+       <ExploreTopics />
 
       {/* AI News Section */}
       {loadingNews ? (
