@@ -18,7 +18,7 @@ const TopicCard = ({ topic, icon: Icon, onClick, isExpanded }) => {
   const handleClick = () => {
     if (isExpanded) {
       // Second click - navigate to topic page
-      window.location.href = `/topics/${topic.slug}`;
+      window.location.href = `/blog`;
     } else {
       // First click - expand card
       onClick(topic.slug);
